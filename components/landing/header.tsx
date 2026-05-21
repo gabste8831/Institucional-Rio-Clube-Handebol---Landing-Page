@@ -33,7 +33,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 transition-colors duration-300",
         isScrolled
           ? "bg-background/60 backdrop-blur-lg border-b border-border"
           : "bg-background-transparent backdrop-blur-[3px] border-b border-transparent", 
@@ -54,7 +54,7 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -72,7 +72,7 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden h-9 w-9"
+              className="lg:hidden h-9 w-9"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? (
@@ -83,7 +83,7 @@ export function Header() {
             </Button>
             <Button
               asChild
-              className="hidden md:inline-flex bg-foreground text-background hover:bg-foreground/90"
+              className="hidden lg:inline-flex bg-foreground text-background hover:bg-foreground/90"
             >
               <Link href="#contato">Participar</Link>
             </Button>
@@ -98,7 +98,8 @@ export function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-background border-b border-border"
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:hidden bg-background border-b border-border"
           >
             <nav className="flex flex-col px-4 py-4 gap-2">
               {navLinks.map((link) => (
