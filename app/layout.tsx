@@ -17,7 +17,6 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: 'Handebol Rio do Sul | Projeto Esportivo Comunitário',
   description: 'Projeto de handebol comunitário em Rio do Sul. Treinos gratuitos para crianças, jovens e adultos. Venha fazer parte do time!',
-  generator: 'v0.app',
   keywords: ['handebol', 'rio do sul', 'esporte', 'treino', 'gratuito', 'comunidade'],
   icons: {
     icon: [

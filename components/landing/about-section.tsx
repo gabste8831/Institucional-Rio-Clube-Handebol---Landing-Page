@@ -9,7 +9,7 @@ const features = [
   {
     icon: Users,
     title: "Para Todos",
-    description: "Crianças, jovens e adultos são bem-vindos. Treinos adaptados para cada faixa etária e nível de experiência.",
+    description: "Crianças, jovens e adultos são bem-vindos. Treinos orientados por profissionais, adaptados para cada faixa etária e nível de experiência.",
   },
   {
     icon: Target,
@@ -39,7 +39,7 @@ export function AboutSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center justify-center mb-16"
         >
           <span className="inline-block text-sm uppercase tracking-widest text-verde font-medium mb-4">
             Sobre o Projeto
@@ -48,8 +48,8 @@ export function AboutSection() {
             Mais que um esporte,{" "}
             <span className="text-muted-foreground">uma comunidade</span>
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-muted-foreground text-pretty">
-            O Handebol Rio do Sul é um projeto que vai além das quadras. Formamos atletas, 
+          <p className="max-w-2xl text-base text-muted-foreground text-pretty mx-auto my-0">
+            O <b>Rio Clube Handebol</b> é um projeto que vai além das quadras. Formamos atletas, 
             construímos amizades e fortalecemos nossa comunidade através do esporte.
           </p>
         </motion.div>

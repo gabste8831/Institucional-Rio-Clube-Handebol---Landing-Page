@@ -35,8 +35,8 @@ export function Header() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled
-          ? "bg-background/80 backdrop-blur-lg border-b border-border"
-          : "bg-transparent"
+          ? "bg-background/60 backdrop-blur-lg border-b border-border"
+          : "bg-background-transparent backdrop-blur-[3px] border-b border-transparent", 
       )}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -49,7 +49,7 @@ export function Header() {
               <span className="h-2 w-2 rounded-full bg-azul" />
             </div>
             <span className="font-serif text-lg font-semibold tracking-tight">
-              Handebol Rio do Sul
+              Rio Clube Handebol
             </span>
           </Link>
 

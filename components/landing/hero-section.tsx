@@ -15,7 +15,7 @@ export function HeroSection() {
           src="/images/hero-handball.jpg"
           alt="Handebol em ação"
           fill
-          className="object-cover opacity-20 dark:opacity-10"
+          className="object-cover opacity-40 saturate-50 blur-[1px] dark:opacity-55"
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/80 to-background" />
@@ -47,9 +47,10 @@ export function HeroSection() {
           </motion.div>
 
           {/* Main Title */}
-          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight text-balance mb-6">
-            <span className="block">Handebol</span>
-            <span className="block text-muted-foreground">Rio do Sul</span>
+          <h1 className="font-serif text-6xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight text-balance mb-6">
+            <span className="block">Rio Clube</span>
+            <span className="block text-muted-foreground">Handebol</span>
+            <span className="block text-xs tracking-[.30em] uppercase pt-4 font-sans font-normal text-muted-foreground">Rio do Sul - SC</span>
           </h1>
 
           {/* Subtitle */}
@@ -57,11 +58,12 @@ export function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="max-w-2xl mx-auto text-lg sm:text-xl text-muted-foreground text-pretty mb-10"
+            className="max-w-2xl mx-auto text-base sm:text-xl text-muted-foreground text-pretty mb-10"
           >
-            Projeto esportivo comunitário que oferece treinos gratuitos para crianças, 
-            jovens e adultos. Venha desenvolver seu talento e fazer parte do time 
-            principal de handebol da cidade.
+            Projeto esportivo pela fundação de esportes da cidade,
+            que oferece treinos gratuitos para crianças, jovens e adultos. 
+            Venha desenvolver seu talento e fazer parte do 
+            time principal de handebol da cidade.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -74,7 +76,7 @@ export function HeroSection() {
             <Button
               asChild
               size="lg"
-              className="bg-foreground text-background hover:bg-foreground/90 px-8"
+              className="bg-foreground text-background hover:bg-foreground/80 px-8"
             >
               <Link href="#contato">
                 <Phone className="mr-2 h-4 w-4" />
@@ -85,7 +87,7 @@ export function HeroSection() {
               asChild
               variant="outline"
               size="lg"
-              className="px-8"
+              className='hover:bg-foreground hover:text-background border-none cursor-pointer dark:hover:bg-white/90 transition-colors duration-200 ease-out'
             >
               <Link
                 href="https://www.instagram.com/rioclube_handebol/"

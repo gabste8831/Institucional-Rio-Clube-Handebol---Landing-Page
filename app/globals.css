@@ -16,7 +16,7 @@
   --secondary-foreground: oklch(0.15 0 0);
   --muted: oklch(0.94 0.002 90);
   --muted-foreground: oklch(0.45 0 0);
-  --accent: oklch(0.55 0.18 145);
+  --accent: oklch(0.43005 0.16561 258.873);
   --accent-foreground: oklch(0.98 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
@@ -41,7 +41,7 @@
   /* Custom colors for Rio do Sul */
   --verde: oklch(0.55 0.18 145);
   --amarelo: oklch(0.85 0.18 95);
-  --azul: oklch(0.55 0.15 250);
+  --azul: oklch(0.60096 0.21874 257.76);
 }
 
 .dark {
@@ -57,21 +57,21 @@
   --secondary-foreground: oklch(0.95 0 0);
   --muted: oklch(0.22 0 0);
   --muted-foreground: oklch(0.65 0 0);
-  --accent: oklch(0.55 0.18 145);
+  --accent: oklch(0.60096 0.21874 257.76);
   --accent-foreground: oklch(0.95 0 0);
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
   --border: oklch(0.25 0 0);
   --input: oklch(0.22 0 0);
-  --ring: oklch(0.55 0.18 145);
-  --chart-1: oklch(0.55 0.18 145);
+  --ring: oklch(0.64065 0.19745 252.99);
+  --chart-1: oklch(0.64065 0.19745 252.99);
   --chart-2: oklch(0.85 0.18 95);
   --chart-3: oklch(0.55 0.15 250);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
   --sidebar: oklch(0.15 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.55 0.18 145);
+  --sidebar-primary: oklch(0.64065 0.19745 252.99);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.22 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
@@ -79,9 +79,9 @@
   --sidebar-ring: oklch(0.439 0 0);
   
   /* Custom colors for Rio do Sul */
-  --verde: oklch(0.55 0.18 145);
+  --azul: oklch(0.64065 0.19745 252.99);
   --amarelo: oklch(0.85 0.18 95);
-  --azul: oklch(0.55 0.15 250);
+  --verde: oklch(0.56981 0.18653 143.703);
 }
 
 @theme inline {
