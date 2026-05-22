@@ -39,7 +39,7 @@ export function HistorySection() {
   const [isTimelineActive, setIsTimelineActive] = useState(false)
 
   return (
-    <section id="historia" className="relative min-h-screen flex items-center justify-center overflow-hidden py-24 sm:py-32 bg-primary/10" ref={ref}>
+    <section id="historia" className="relative pt-24 sm:pt-32 bg-primary/12" ref={ref}>
       {/* Background */}
       <div className="absolute inset-0">
 
@@ -56,7 +56,7 @@ export function HistorySection() {
           <span className="inline-block text-sm uppercase tracking-widest text-verde font-medium mb-4">
             Nossa História
           </span>
-          <h2 className="font-serif text-5xl sm:text-6xl font-medium tracking-tight text-balance mb-6">
+          <h2 className="font-serif text-4xl sm:text-5xl font-medium tracking-tight text-balance mb-6">
             Uma jornada de{" "}
             <span className="text-muted-foreground">dedicação</span>
           </h2>
@@ -93,9 +93,9 @@ export function HistorySection() {
                   {/* Content Card */}
                   <div className={`ml-12 md:ml-0 md:w-1/2 ${index % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12"}`}>
                     <motion.div
-                      className="p-6 rounded-2xl bg-gradient-to-br from-card/80 to-card/40 border border-border/50 hover:border-primary/15 transition-colors duration-300 group"
+                      className="p-6 rounded-2xl bg-muted-foreground/6 border border-border/50 hover:border-primary/15 transition-colors duration-300 group"
                     >
-                      <span className="inline-block text-4xl font-serif font-bold text-muted-foreground/20 mb-4">
+                      <span className="inline-block text-4xl font-serif font-bold text-muted-foreground/35 mb-6">
                         {item.year}
                       </span>
                       <h3 className="text-lg font-semibold mb-2 text-foreground">
@@ -114,7 +114,7 @@ export function HistorySection() {
         </div>
 
         {/* Color Bars */}
-        <div className="mt-8 flex h-1 rounded-full overflow-hidden">
+        <div className="mt-16 flex h-1 rounded-full overflow-hidden">
           <div className="flex-1 bg-verde" />
           <div className="flex-1 bg-amarelo" />
           <div className="flex-1 bg-azul" />
