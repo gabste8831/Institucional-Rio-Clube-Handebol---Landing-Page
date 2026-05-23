@@ -1,10 +1,12 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import Image from "next/image"
 import { Calendar, Clock, MapPin, Shield, Target, Dumbbell, Hand, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import useEmblaCarousel from "embla-carousel-react"
+import Autoplay from "embla-carousel-autoplay"
 
 const schedule = [
   { day: "Segunda-feira", time: "19:00 - 21:00", type: "Treino Técnico" },
@@ -46,7 +48,7 @@ const venues = [
   },
   {
     id: 2,
-    name: "Centro Universitário de Rio do Sul (UNIDAVI)",
+    name: "Centro Universitário de Rio do Sul - UNIDAVI",
     address: "R. Júlio Roussenq Filho, 87-253 - Jardim América, Rio do Sul - SC, 89160-000",
     description: "Espaço dedicado ao treinamento técnico e desenvolvimento dos atletas.",
     image: "/images/training.jpg",
@@ -65,12 +67,46 @@ const venues = [
 export function TrainingSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
-  const [currentVenue, setCurrentVenue] = useState(0)
 
-  const currentLocation = venues[currentVenue]
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      loop: true,
+      align: "center",
+      skipSnaps: false,
+      duration: 40,
+    },
+    [
+      Autoplay({
+        playOnInit: true,
+        delay: 5000,
+        stopOnInteraction: true,
+        stopOnMouseEnter: false,
+        stopOnLastSnap: false,
+      }),
+    ]
+  )
+
+  const [selectedIndex, setSelectedIndex] = useState(0)
+
+  useEffect(() => {
+    if (!emblaApi) return
+
+    const onSelect = () => {
+      setSelectedIndex(emblaApi.selectedScrollSnap())
+    }
+
+    onSelect()
+    emblaApi.on("select", onSelect)
+    emblaApi.on("reInit", onSelect)
+
+    return () => {
+      emblaApi.off("select", onSelect)
+      emblaApi.off("reInit", onSelect)
+    }
+  }, [emblaApi])
 
   return (
-    <section id="treinos" className="py-24 sm:py-32 bg-secondary/50" ref={ref}>
+    <section id="treinos" className="py-20 bg-secondary/50" ref={ref}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -166,75 +202,68 @@ export function TrainingSection() {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="space-y-6"
         >
-          <div className="relative h-140 rounded-2xl overflow-hidden">
-            {venues.map((venue, index) => (
-              <motion.div
-                key={venue.id}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: index === currentVenue ? 1 : 0 }}
-                transition={{ duration: 0.5 }}
-                className="absolute inset-0"
-              >
-                <Image
-                  src={venue.image}
-                  alt={venue.name}
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/60 to-transparent" />
-              </motion.div>
-            ))}
+          <div className="overflow-hidden rounded-2xl" ref={emblaRef}>
+            <div className="flex">
+              {venues.map((venue) => (
+                <div
+                  key={venue.id}
+                  className="flex-[0_0_100%] min-w-0"
+                >
+                  <div className="relative h-100 rounded-2xl overflow-hidden">
+                    <Image
+                      src={venue.image}
+                      alt={venue.name}
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/60 to-transparent" />
 
-            <motion.div
-              key={currentVenue}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="absolute inset-0 flex flex-col justify-end"
-            >
-                <div className="relative bg-gradient-to-t from-black/90 via-black/60 to-transparent p-6 pt-10">
-                <div className="flex flex-col sm:flex-row md:flex-col gap-4">
-                  <div className="flex-1">
-                    <h3 className="font-serif text-2xl font-medium text-white mb-6">
-                      {currentLocation.name}
-                    </h3>
-                    <div className="flex items-start gap-2 mb-2">
-                      <MapPin className="h-3.5 w-3.5 text-red shrink-0 mt-0.5" />
-                      <p className="text-xs text-white/90 truncate">{currentLocation.address}…</p>
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/90 via-background/60 to-transparent p-6 pt-10 flex flex-col justify-end">
+                      <div className="flex flex-col gap-4">
+                        <div className="flex-1">
+                          <h3 className="font-serif text-2xl font-medium text-foreground mb-4">
+                            {venue.name}
+                          </h3>
+                          <div className="flex items-start gap-2 mb-1">
+                            <MapPin className="h-3.5 w-3.5 text-red shrink-0 mt-0.5" />
+                            <p className="text-xs text-foreground/90 truncate">{venue.address}.</p>
+                          </div>
+                          <p className="text-xs text-foreground/70">
+                            Treinos realizados em espaços amplos e preparados para a prática do handebol.
+                          </p>
+                        </div>
+                        <Button
+                          asChild
+                          size="sm"
+                          className="group md:absolute md:right-6 md:bottom-6 inline-flex h-10 rounded-lg border border-foreground/30 text-foreground bg-transparent transition-all duration-300 overflow-hidden hover:bg-foreground/10 hover:border-foreground/50 font-normal w-fit"
+                        >
+                          <a
+                            href={venue.mapsUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-3"
+                          >
+                            <MapPin className="h-4 w-4 text-foreground transition-colors duration-300 group-hover:text-foreground" />
+                            <span className="transition-all duration-300 ease-out">
+                              Mapa
+                            </span>
+                          </a>
+                        </Button>
+                      </div>
                     </div>
-                    <p className="text-xs text-white/70">
-                      Treinos realizados em espaços amplos e preparados para a prática do handebol.
-                    </p>
                   </div>
-                  <Button
-                    asChild
-                    size="sm"
-                    className="group md:absolute md:right-0 md:bottom-0 md:-m-6 inline-flex h-10 rounded-lg border border-white/30 text-white bg-transparent transition-all duration-300 overflow-hidden hover:bg-white/10 hover:border-white/50 font-normal w-fit"
-                  >
-                    <a
-                      href={currentLocation.mapsUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-3"
-                    >
-                      <MapPin className="h-4 w-4 text-white transition-colors duration-300 group-hover:text-white" />
-                      <span className="transition-all duration-300 ease-out">
-                        Mapa
-                      </span>
-                    </a>
-                  </Button>
                 </div>
-              </div>
-            </motion.div>
+              ))}
+            </div>
           </div>
 
           <div className="flex gap-2 justify-center">
             {venues.map((_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentVenue(index)}
+                onClick={() => emblaApi?.scrollTo(index)}
                 className={`h-2 rounded-full transition-all ${
-                  index === currentVenue
+                  index === selectedIndex
                     ? "bg-amarelo w-8"
                     : "bg-border/50 w-2 hover:bg-border"
                 }`}

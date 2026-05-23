@@ -51,7 +51,7 @@ export function GallerySection() {
   const [selectedImage, setSelectedImage] = useState<typeof images[0] | null>(null)
 
   return (
-    <section id="galeria" className="py-24 sm:py-32 bg-secondary/50" ref={ref}>
+    <section id="galeria" className="py-20 bg-secondary/50" ref={ref}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
