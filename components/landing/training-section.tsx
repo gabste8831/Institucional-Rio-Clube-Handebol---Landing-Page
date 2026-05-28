@@ -43,7 +43,7 @@ const venues = [
     name: "Colégio Municipal João Custódio da Luz",
     address: "R. Ladeira Porto Velho, 191 - Boa Vista, Rio do Sul - SC, 89167-234",
     description: "Nosso principal local de treino.",
-    image: "/images/training.jpg",
+    image: "/images/colegiojoaocustodio.png",
     mapsUrl: "https://maps.app.goo.gl/2pVbGKXdX7uCGVjW6",
   },
   {
@@ -51,7 +51,7 @@ const venues = [
     name: "Centro Universitário de Rio do Sul - UNIDAVI",
     address: "R. Júlio Roussenq Filho, 87-253 - Jardim América, Rio do Sul - SC, 89160-000",
     description: "Espaço dedicado ao treinamento técnico e desenvolvimento dos atletas.",
-    image: "/images/training.jpg",
+    image: "/images/ginasiopz.png",
     mapsUrl: "https://maps.app.goo.gl/z2DWVCKeCeGzW8oc8",
   },
   {
@@ -59,7 +59,7 @@ const venues = [
     name: "IFC Campus Agronomia Rio do Sul",
     address: "Estr. do Redentor, 5665 - Serra Canoas, Rio do Sul - SC, 89163-356",
     description: "Quadra auxiliar para treinos adicionais e competições locais.",
-    image: "/images/training.jpg",
+    image: "/images/ifcriodosul.png",
     mapsUrl: "https://maps.app.goo.gl/gsVmUfJZEwdWHyBy9",
   },
 ]
@@ -228,9 +228,6 @@ export function TrainingSection() {
                             <MapPin className="h-3.5 w-3.5 text-red shrink-0 mt-0.5" />
                             <p className="text-xs text-foreground/90 truncate">{venue.address}.</p>
                           </div>
-                          <p className="text-xs text-foreground/70">
-                            Treinos realizados em espaços amplos e preparados para a prática do handebol.
-                          </p>
                         </div>
                         <Button
                           asChild

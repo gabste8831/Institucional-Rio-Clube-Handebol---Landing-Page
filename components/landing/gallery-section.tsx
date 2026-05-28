@@ -1,47 +1,69 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import { X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
+import useEmblaCarousel from "embla-carousel-react"
+import Autoplay from "embla-carousel-autoplay"
 
 const images = [
   {
     id: 1,
-    src: "/images/hero-handball.jpg",
-    alt: "Jogo de handebol",
+    src: "/images/lance_de_jogo.jpg",
+    alt: "Lance de jogo",
     category: "Jogos",
+    description: "Ação intensa durante a partida com os atletas em movimento.",
   },
   {
     id: 2,
-    src: "/images/team-photo.jpg",
-    alt: "Time reunido",
+    src: "/images/foto_time_completo.jpg",
+    alt: "Time completo",
     category: "Equipe",
+    description: "Nosso elenco pronto para os desafios da temporada.",
   },
   {
     id: 3,
-    src: "/images/training.jpg",
-    alt: "Treino de handebol",
+    src: "/images/treino_arremecos.jpg",
+    alt: "Treino de arremessos",
     category: "Treinos",
+    description: "Trabalho técnico focado em arremessos e finalizações.",
   },
   {
     id: 4,
-    src: "/images/hero-handball.jpg",
-    alt: "Treino de goleiros",
-    category: "Treinos",
+    src: "/images/lance_de_jogo_finalização.jpg",
+    alt: "Tentativa de finalização",
+    category: "Jogos",
+    description: "Momento crítico de uma tentativa de gol durante a partida.",
   },
   {
     id: 5,
-    src: "/images/training.jpg",
-    alt: "Celebração de vitória",
-    category: "Jogos",
+    src: "/images/treino_de_finalizacao.jpg",
+    alt: "Treino de finalização",
+    category: "Treinos",
+    description: "Aprimoramento das técnicas de conclusão dos atletas.",
   },
   {
     id: 6,
-    src: "/images/team-photo.jpg",
-    alt: "Aquecimento",
+    src: "/images/duas_equipes_cumprimento.jpg",
+    alt: "Equipes em cumprimento",
+    category: "Equipe",
+    description: "Confraternização com outras equipes antes da competição.",
+  },
+  {
+    id: 7,
+    src: "/images/equipes_rio_do_sul_e_blumenau.jpg",
+    alt: "Rio do Sul vs Blumenau",
+    category: "Jogos",
+    description: "Confronto contra a equipe de Blumenau com bastante emoção.",
+  },
+  {
+    id: 8,
+    src: "/images/grito_de_guerra.jpg",
+    alt: "Grito de guerra",
     category: "Treinos",
+    description: "União e motivação do time em preparação para os desafios.",
   },
 ]
 
@@ -49,6 +71,43 @@ export function GallerySection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [selectedImage, setSelectedImage] = useState<typeof images[0] | null>(null)
+
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      loop: true,
+      align: "start",
+      skipSnaps: false,
+      duration: 40,
+    },
+    [
+      Autoplay({
+        playOnInit: true,
+        delay: 6000,
+        stopOnInteraction: true,
+        stopOnMouseEnter: false,
+        stopOnLastSnap: false,
+      }),
+    ]
+  )
+
+  const [selectedIndex, setSelectedIndex] = useState(0)
+
+  useEffect(() => {
+    if (!emblaApi) return
+
+    const onSelect = () => {
+      setSelectedIndex(emblaApi.selectedScrollSnap())
+    }
+
+    onSelect()
+    emblaApi.on("select", onSelect)
+    emblaApi.on("reInit", onSelect)
+
+    return () => {
+      emblaApi.off("select", onSelect)
+      emblaApi.off("reInit", onSelect)
+    }
+  }, [emblaApi])
 
   return (
     <section id="galeria" className="py-20 bg-secondary/50" ref={ref}>
@@ -71,34 +130,92 @@ export function GallerySection() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 auto-rows-[220px] sm:auto-rows-[260px] lg:auto-rows-[280px]">
-          {images.map((image, index) => (
-            <motion.div
-              key={image.id}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              className={`relative overflow-hidden rounded-2xl cursor-pointer group h-full ${
-                index === 0 ? "sm:col-span-2 sm:row-span-2" : ""
-              }`}
-              onClick={() => setSelectedImage(image)}
-            >
-              <div className="relative h-full w-full">
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-              <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/20 transition-colors" />
-              <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                <span className="px-3 py-1 rounded-full bg-background/90 text-foreground text-xs font-medium">
-                  {image.category}
-                </span>
-              </div>
-            </motion.div>
-          ))}
+        {/* Carrossel Mobile/Tablet */}
+        <div className="lg:hidden mb-8">
+          <div className="overflow-hidden rounded-2xl" ref={emblaRef}>
+            <div className="flex">
+              {images.map((image) => (
+                <div
+                  key={image.id}
+                  className="flex-[0_0_100%] min-w-0 sm:flex-[0_0_50%]"
+                >
+                  <div
+                    className="relative h-64 rounded-2xl overflow-hidden cursor-pointer group m-2 ml-0"
+                    onClick={() => setSelectedImage(image)}
+                  >
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/20 transition-colors" />
+                    <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <span className="px-3 py-1 rounded-full bg-background/90 text-foreground text-xs font-medium">
+                        {image.category}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Dots indicadores */}
+          <div className="flex justify-center gap-2 mt-4">
+            {images.map((_, index) => (
+              <button
+                key={index}
+                className={`h-2 rounded-full transition-all ${
+                  index === selectedIndex ? "bg-amarelo w-8" : "bg-muted-foreground/30 w-2"
+                }`}
+                onClick={() => emblaApi?.scrollTo(index)}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Grid Desktop */}
+        <div className="hidden lg:grid grid-cols-4 gap-3 auto-rows-[220px]">
+          {images.map((image, index) => {
+            let colSpan = "col-span-1"
+            let rowSpan = "row-span-1"
+            
+            // Padrão compacto sem buracos - máximo 3 linhas
+            if (index === 0) {
+              colSpan = "col-span-2"
+              rowSpan = "row-span-2"
+            } else if (index === 1) {
+              colSpan = "col-span-2"
+              rowSpan = "row-span-1"
+            }
+
+            return (
+              <motion.div
+                key={image.id}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.4, delay: index * 0.08 }}
+                className={`relative overflow-hidden rounded-2xl cursor-pointer group h-full ${colSpan} ${rowSpan}`}
+                onClick={() => setSelectedImage(image)}
+              >
+                <div className="relative h-full w-full">
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/20 transition-colors" />
+                <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="px-3 py-1 rounded-full bg-background/90 text-foreground text-xs font-medium">
+                    {image.category}
+                  </span>
+                </div>
+              </motion.div>
+            )
+          })}
         </div>
 
         {/* Lightbox */}
@@ -123,8 +240,8 @@ export function GallerySection() {
                 className="object-cover"
               />
               <div className="absolute bottom-4 left-4">
-                <span className="px-4 py-2 rounded-full bg-background/90 text-foreground text-sm font-medium">
-                  {selectedImage.alt}
+                <span className="px-4 py-2 rounded-full bg-background/90 text-foreground text-xs font-medium">
+                  {selectedImage.category}
                 </span>
               </div>
             </div>

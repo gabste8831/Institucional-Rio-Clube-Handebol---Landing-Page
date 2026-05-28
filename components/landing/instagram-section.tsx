@@ -1,23 +1,28 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { useRef, useEffect } from "react"
 import { Instagram, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
-const mockPosts = [
-  { id: 1, likes: 124, comments: 8 },
-  { id: 2, likes: 89, comments: 5 },
-  { id: 3, likes: 156, comments: 12 },
-  { id: 4, likes: 203, comments: 15 },
-  { id: 5, likes: 67, comments: 3 },
-  { id: 6, likes: 142, comments: 9 },
-]
-
 export function InstagramSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+
+  useEffect(() => {
+    // Carregar o script do Behold
+    const script = document.createElement('script')
+    script.src = 'https://cdn.beholdsocial.com/embed/2.0/behold.js'
+    script.async = true
+    document.body.appendChild(script)
+
+    return () => {
+      if (document.body.contains(script)) {
+        document.body.removeChild(script)
+      }
+    }
+  }, [])
 
   return (
     <section className="py-24 sm:py-32" ref={ref}>
@@ -40,34 +45,20 @@ export function InstagramSection() {
           </p>
         </motion.div>
 
-        {/* Instagram Feed Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-10">
-          {mockPosts.map((post, index) => (
-            <motion.a
-              key={post.id}
-              href="https://www.instagram.com/rioclube_handebol/"
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="relative h-56 sm:h-64 lg:h-72 bg-muted rounded-3xl overflow-hidden group"
-            >
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <Instagram className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
-                  <span className="text-xs text-muted-foreground">Post {post.id}</span>
-                </div>
-              </div>
-              <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/60 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
-                <div className="text-background text-sm flex items-center gap-4">
-                  <span>❤️ {post.likes}</span>
-                  <span>💬 {post.comments}</span>
-                </div>
-              </div>
-            </motion.a>
-          ))}
-        </div>
+        {/* Behold Widget - Instagram Feed */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="w-full mb-10 flex justify-center"
+        >
+          {/* Cole aqui o widget code do Behold */}
+          {/* Crie em: https://behold.so/ */}
+          <div 
+            className="behold-embed" 
+            data-behold-id="COLOQUE_SEU_WIDGET_ID_AQUI"
+          />
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 10 }}

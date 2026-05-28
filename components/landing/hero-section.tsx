@@ -12,7 +12,7 @@ export function HeroSection() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/images/hero-handball.jpg"
+          src="/images/foto_time_completo.jpg"
           alt="Handebol em ação"
           fill
           className="object-cover opacity-40 saturate-50 blur-[1px] dark:opacity-55"

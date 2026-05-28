@@ -17,7 +17,7 @@ const coordinators = [
     cref: "CREF: 123456",
     phone: "(47) 99999-0001",
     email: "eliani@handebolriodosul.com",
-    instagram: "@eliani.handball",
+    instagram: "@elianipatzlaff",
     image: "/images/eliani.png",
   },
   {
@@ -26,16 +26,16 @@ const coordinators = [
     description: "Foco em preparação física e estratégias de jogo para competições. Estudante de Educação Física.",
     phone: "(47) 90000-0000",
     email: "micael@handebolriodosul.com",
-    instagram: "@micael.handball",
+    instagram: "@albinomicael",
     image: "/images/micael.png",
   },
   {
     name: "Igor Silva",
     role: "Auxiliar Técnico",
-    description: "Trabalho com categorias de base e formação de novos talentos. Estudante de Educação Física.",
+    description: "Responsável pelas categorias de base e formação de novos talentos, em especial, goleiros. Estudante de Educação Física.",
     phone: "(47) 90000-0000",
     email: "igor@handebolriodosul.com",
-    instagram: "@igor.handball",
+    instagram: "@siilva.igord",
     image: "/images/igor.png",
   },
 ]
@@ -133,7 +133,7 @@ export function TeamSection() {
                         src={coordinator.image}
                         alt={coordinator.name}
                         fill
-                        className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                        className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
                       />
                       <div className="absolute bottom-0 left-0 right-0 h-1 flex">
                         <div className="flex-1 bg-verde" />
