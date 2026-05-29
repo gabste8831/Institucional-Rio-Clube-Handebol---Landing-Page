@@ -2,34 +2,50 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef, useState } from "react"
-import { Building2, Heart, Send, CheckCircle } from "lucide-react"
+import { Building2, Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { Card, CardContent } from "@/components/ui/card"
 
 const currentPartners = [
-  { name: "Fundação de Esportes", type: "Institucional" },
-  { name: "Prefeitura de Rio do Sul", type: "Governamental" },
-  { name: "Empresa Parceira 1", type: "Patrocinador" },
-  { name: "Empresa Parceira 2", type: "Apoiador" },
+  { name: "FME Rio do Sul", logo: "/images/fme.png", type: "Institucional", darkInvert: true },
+  { name: "Prefeitura de Rio do Sul", logo: "/images/prefeitura.png", type: "Governamental", darkInvert: true },
+  { name: "Empresa Parceira 1", logo: "/images/sponsor1.png", type: "Patrocinador", darkInvert: false },
+  { name: "Empresa Parceira 2", logo: "/images/sponsor2.png", type: "Apoiador", darkInvert: false },
 ]
+
+// Fallback component to render an elegant badge if PNG logo doesn't exist yet
+const PartnerLogo = ({ partner }: { partner: typeof currentPartners[0] }) => {
+  const [hasError, setHasError] = useState(false)
+  
+  if (hasError || !partner.logo) {
+    return (
+      <div className="flex items-center gap-2 px-6 py-3 rounded-xl bg-muted-foreground/5 border border-border/50 text-muted-foreground/60 select-none mx-2">
+        <Building2 className="h-4 w-4" />
+        <span className="font-sans font-semibold text-[11px] tracking-wider uppercase whitespace-nowrap">{partner.name}</span>
+      </div>
+    )
+  }
+  
+  return (
+    <div className="h-16 flex items-center justify-center px-6">
+      <img
+        src={partner.logo}
+        alt={partner.name}
+        onError={() => setHasError(true)}
+        className={`h-10 w-auto max-w-[150px] object-contain grayscale opacity-60 dark:opacity-45 hover:opacity-100 hover:grayscale-0 dark:hover:opacity-100 transition-all duration-300 ${partner.darkInvert ? 'dark:invert dark:hover:invert-0' : ''}`}
+      />
+    </div>
+  )
+}
 
 export function PartnersSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
-  const [submitted, setSubmitted] = useState(false)
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setSubmitted(true)
-    setTimeout(() => setSubmitted(false), 3000)
-  }
 
   return (
     <section id="parceiros" className="py-24 sm:py-32" ref={ref}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        
+        {/* Cabeçalho */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -43,118 +59,98 @@ export function PartnersSection() {
             Juntos pelo{" "}
             <span className="text-muted-foreground">esporte</span>
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-muted-foreground text-pretty">
-            Empresas e instituições que acreditam no poder do esporte para transformar vidas. 
-            Seu logo pode estar no nosso uniforme de treinos e jogos.
+          <p className="max-w-2xl mx-auto text-base text-muted-foreground text-pretty">
+            Empresas e instituições que acreditam no poder do esporte para transformar vidas.
           </p>
         </motion.div>
 
-        {/* Current Partners */}
+        {/* Carrossel de Logos */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-16"
+          className="mb-20"
         >
-          <h3 className="text-center font-semibold text-lg mb-8">Nossos Parceiros Atuais</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {currentPartners.map((partner, index) => (
-              <motion.div
-                key={partner.name}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
-                className="p-6 rounded-2xl bg-secondary/50 hover:bg-secondary transition-colors text-center"
-              >
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted flex items-center justify-center">
-                  <Building2 className="h-8 w-8 text-muted-foreground" />
-                </div>
-                <p className="font-medium text-sm">{partner.name}</p>
-                <p className="text-xs text-muted-foreground">{partner.type}</p>
-              </motion.div>
-            ))}
+          <h3 className="text-center font-sans font-semibold text-xs tracking-wider uppercase text-muted-foreground mb-8">
+            Nossos Parceiros Atuais
+          </h3>
+          
+          {/* Estilos injetados para o carrossel infinito e responsivo */}
+          <style dangerouslySetInnerHTML={{__html: `
+            @keyframes marquee {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .animate-marquee-loop {
+              display: flex;
+              width: max-content;
+              animation: marquee 25s linear infinite;
+            }
+            .animate-marquee-loop:hover {
+              animation-play-state: paused;
+            }
+          `}} />
+
+          {/* Ribbon do Carrossel */}
+          <div className="w-full overflow-hidden relative py-4 select-none">
+            {/* Sombras laterais para fade out suave das marcas */}
+            <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+            <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+            
+            <div className="animate-marquee-loop flex gap-12 items-center">
+              {/* Grupo original de logos */}
+              {currentPartners.map((partner) => (
+                <PartnerLogo key={partner.name} partner={partner} />
+              ))}
+              {/* Cópia para efeito seamless infinito */}
+              {currentPartners.map((partner) => (
+                <PartnerLogo key={`dup-${partner.name}`} partner={partner} />
+              ))}
+              {/* Cópia adicional para preenchimento em telas ultra-wide */}
+              {currentPartners.map((partner) => (
+                <PartnerLogo key={`dup2-${partner.name}`} partner={partner} />
+              ))}
+            </div>
           </div>
         </motion.div>
 
-        {/* Partnership Form */}
+        {/* Banner Informativo / Call to Action Patrocinador */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="max-w-2xl mx-auto"
+          className="max-w-4xl mx-auto"
         >
-          <Card className="overflow-hidden">
-            <div className="bg-foreground text-background p-6">
-              <div className="flex items-center gap-3">
-                <Heart className="h-6 w-6" />
-                <div>
-                  <h3 className="font-semibold text-xl">Seja um Parceiro</h3>
-                  <p className="text-sm opacity-80">
-                    Apoie o esporte e tenha visibilidade para sua marca
-                  </p>
-                </div>
-              </div>
+          <div className="relative rounded-2xl bg-muted-foreground/4 border border-border/70 p-8 sm:p-12 overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+            {/* Elemento decorativo discreto */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-azul/5 rounded-full filter blur-3xl pointer-events-none" />
+            
+            <div className="flex-1 space-y-4 max-w-xl relative z-10">
+              <span className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground font-semibold">
+                <Heart className="h-4 w-4 text-azul fill-azul/20" />
+                Apoie o Projeto
+              </span>
+              <h3 className="font-serif text-2xl sm:text-3xl font-medium tracking-tight text-foreground">
+                Sua marca jogando junto com o Rio do Sul
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Ao apoiar o Rio Clube Handebol, sua marca ganha destaque nos nossos uniformes oficiais, banners, bandeiras de eventos e redes sociais. Além disso, sua empresa contribui ativamente para o desenvolvimento social e desportivo de jovens na nossa região.
+              </p>
             </div>
-            <CardContent className="p-6">
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="company">Empresa / Instituição</Label>
-                    <Input id="company" placeholder="Nome da empresa" required />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="contact-name">Nome do Contato</Label>
-                    <Input id="contact-name" placeholder="Seu nome" required />
-                  </div>
-                </div>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="contact-email">E-mail</Label>
-                    <Input id="contact-email" type="email" placeholder="email@empresa.com" required />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="contact-phone">Telefone</Label>
-                    <Input id="contact-phone" placeholder="(47) 99999-0000" required />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="partnership-type">Tipo de Parceria</Label>
-                  <Input
-                    id="partnership-type"
-                    placeholder="Ex: Patrocínio, Doação de materiais, Apoio logístico..."
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="partnership-message">Mensagem</Label>
-                  <Textarea
-                    id="partnership-message"
-                    placeholder="Conte-nos mais sobre como gostaria de apoiar o projeto..."
-                    rows={4}
-                    required
-                  />
-                </div>
-                <Button
-                  type="submit"
-                  className="w-full bg-azul hover:bg-azul/90 text-white"
-                  disabled={submitted}
-                >
-                  {submitted ? (
-                    <>
-                      <CheckCircle className="mr-2 h-4 w-4" />
-                      Proposta Enviada!
-                    </>
-                  ) : (
-                    <>
-                      <Send className="mr-2 h-4 w-4" />
-                      Enviar Proposta de Parceria
-                    </>
-                  )}
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
+            
+            <div className="shrink-0 relative z-10">
+              <Button
+                asChild
+                className="inline-flex h-11 px-6 rounded-xl bg-foreground text-background hover:bg-foreground/90 font-medium transition-all duration-300 hover:shadow-lg shadow-sm"
+              >
+                <a href="#contato">
+                  Fale Conosco
+                </a>
+              </Button>
+            </div>
+          </div>
         </motion.div>
+
       </div>
     </section>
   )

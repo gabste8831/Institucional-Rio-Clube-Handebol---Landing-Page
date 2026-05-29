@@ -125,7 +125,7 @@ export function GallerySection() {
             Momentos que{" "}
             <span className="text-muted-foreground">marcam</span>
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-muted-foreground text-pretty">
+          <p className="max-w-2xl mx-auto text-base text-muted-foreground text-pretty">
             Registros de treinos, competições e confraternizações do nosso time.
           </p>
         </motion.div>
@@ -162,14 +162,30 @@ export function GallerySection() {
           </div>
           
           {/* Dots indicadores */}
-          <div className="flex justify-center gap-2 mt-4">
+          <div className="flex justify-center gap-2 mt-6">
             {images.map((_, index) => (
-              <button
+              <motion.div
                 key={index}
-                className={`h-2 rounded-full transition-all ${
-                  index === selectedIndex ? "bg-amarelo w-8" : "bg-muted-foreground/30 w-2"
+                onClick={() => {
+                  emblaApi?.scrollTo(index)
+                  const autoplayPlugin = emblaApi?.plugins()?.autoplay as any
+                  if (autoplayPlugin && typeof autoplayPlugin.play === 'function') {
+                    autoplayPlugin.play()
+                  }
+                }}
+                animate={{
+                  width: selectedIndex === index ? 32 : 8,
+                }}
+                transition={{
+                  duration: 0.3,
+                  ease: "easeInOut"
+                }}
+                className={`h-1 cursor-pointer rounded-full transition-all ${
+                  selectedIndex === index 
+                    ? 'bg-amarelo' 
+                    : 'bg-muted-foreground/30'
                 }`}
-                onClick={() => emblaApi?.scrollTo(index)}
+                whileHover={{ scale: 1.1 }}
               />
             ))}
           </div>

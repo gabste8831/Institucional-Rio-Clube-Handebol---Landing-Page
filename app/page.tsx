@@ -8,6 +8,7 @@ import { GallerySection } from "@/components/landing/gallery-section"
 import { InstagramSection } from "@/components/landing/instagram-section"
 import { ContactSection } from "@/components/landing/contact-section"
 import { PartnersSection } from "@/components/landing/partners-section"
+import { RealizationSection } from "@/components/landing/realization-section"
 import { Footer } from "@/components/landing/footer"
 
 export default function Home() {
@@ -23,6 +24,7 @@ export default function Home() {
       <InstagramSection />
       <ContactSection />
       <PartnersSection />
+      <RealizationSection />
       <Footer />
     </main>
   )

@@ -40,7 +40,7 @@ export function InstagramSection() {
             Fique por dentro das{" "}
             <span className="text-muted-foreground">nossas redes</span>
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-muted-foreground text-pretty">
+          <p className="max-w-2xl mx-auto text-base text-muted-foreground text-pretty">
             Acompanhe nossa rotina, novidades e bastidores no Instagram.
           </p>
         </motion.div>

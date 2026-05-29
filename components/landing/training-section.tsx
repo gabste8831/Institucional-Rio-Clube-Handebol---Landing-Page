@@ -117,7 +117,7 @@ export function TrainingSection() {
           <span className="inline-block text-sm uppercase tracking-widest text-verde font-medium mb-4">
             Treinos
           </span>
-          <h2 className="font-serif text-5xl sm:text-6xl font-medium tracking-tight text-balance mb-6">
+          <h2 className="font-serif text-4xl sm:text-5xl font-medium tracking-tight text-balance mb-6">
             Rotina de{" "}
             <span className="text-muted-foreground">treinamentos</span>
           </h2>
@@ -254,17 +254,30 @@ export function TrainingSection() {
             </div>
           </div>
 
-          <div className="flex gap-2 justify-center">
+          <div className="flex justify-center gap-2 mt-8">
             {venues.map((_, index) => (
-              <button
+              <motion.div
                 key={index}
-                onClick={() => emblaApi?.scrollTo(index)}
-                className={`h-2 rounded-full transition-all ${
-                  index === selectedIndex
-                    ? "bg-amarelo w-8"
-                    : "bg-border/50 w-2 hover:bg-border"
+                onClick={() => {
+                  emblaApi?.scrollTo(index)
+                  const autoplayPlugin = emblaApi?.plugins()?.autoplay as any
+                  if (autoplayPlugin && typeof autoplayPlugin.play === 'function') {
+                    autoplayPlugin.play()
+                  }
+                }}
+                animate={{
+                  width: selectedIndex === index ? 32 : 8,
+                }}
+                transition={{
+                  duration: 0.3,
+                  ease: "easeInOut"
+                }}
+                className={`h-1 cursor-pointer rounded-full transition-all ${
+                  selectedIndex === index 
+                    ? 'bg-amarelo' 
+                    : 'bg-muted-foreground/30'
                 }`}
-                aria-label={`Ir para slide ${index + 1}`}
+                whileHover={{ scale: 1.1 }}
               />
             ))}
           </div>
