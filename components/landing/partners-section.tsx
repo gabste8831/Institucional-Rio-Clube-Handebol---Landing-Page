@@ -6,10 +6,10 @@ import { Building2, Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const currentPartners = [
-  { name: "FMD Rio do Sul", logo: "/images/fmd.png", type: "Institucional", darkInvert: true },
-  { name: "Prefeitura de Rio do Sul", logo: "/images/prefeitura.png", type: "Governamental", darkInvert: true },
-  { name: "Empresa Parceira 1", logo: "/images/sponsor1.png", type: "Patrocinador", darkInvert: false },
-  { name: "Empresa Parceira 2", logo: "/images/sponsor2.png", type: "Apoiador", darkInvert: false },
+  { name: "FMD Rio do Sul", logo: "/images/logo_rio_clube.png", type: "Institucional" },
+  { name: "Prefeitura de Rio do Sul", logo: "/images/logo_rio_clube.png", type: "Governamental" },
+  { name: "Empresa Parceira 1", logo: "/images/logo_rio_clube.png", type: "Patrocinador" },
+  { name: "Empresa Parceira 2", logo: "/images/logo_rio_clube.png", type: "Apoiador" },
 ]
 
 // Fallback component to render an elegant badge if PNG logo doesn't exist yet
@@ -26,12 +26,12 @@ const PartnerLogo = ({ partner }: { partner: typeof currentPartners[0] }) => {
   }
 
   return (
-    <div className="h-16 flex items-center justify-center px-6">
+    <div className="h-40 flex items-center justify-center px-6">
       <img
         src={partner.logo}
         alt={partner.name}
         onError={() => setHasError(true)}
-        className={`h-10 w-auto max-w-[150px] object-contain grayscale opacity-60 dark:opacity-45 hover:opacity-100 hover:grayscale-0 dark:hover:opacity-100 transition-all duration-300 ${partner.darkInvert ? 'dark:invert dark:hover:invert-0' : ''}`}
+        className={`h-34 w-auto max-w-[150px] object-contain grayscale opacity-60 dark:opacity-45 hover:opacity-100 hover:grayscale-0 dark:hover:opacity-100 transition-all duration-300 `}
       />
     </div>
   )
@@ -86,9 +86,6 @@ export function PartnersSection() {
               display: flex;
               width: max-content;
               animation: marquee 25s linear infinite;
-            }
-            .animate-marquee-loop:hover {
-              animation-play-state: paused;
             }
           `}} />
 

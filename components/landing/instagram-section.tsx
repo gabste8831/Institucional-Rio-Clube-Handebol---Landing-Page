@@ -1,28 +1,15 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { useRef, useEffect } from "react"
+import { useRef } from "react"
 import { Instagram, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import Script from "next/script" // Componente nativo do Next.js
 
 export function InstagramSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
-
-  useEffect(() => {
-    // Carregar o script do Behold
-    const script = document.createElement('script')
-    script.src = 'https://cdn.beholdsocial.com/embed/2.0/behold.js'
-    script.async = true
-    document.body.appendChild(script)
-
-    return () => {
-      if (document.body.contains(script)) {
-        document.body.removeChild(script)
-      }
-    }
-  }, [])
 
   return (
     <section className="py-24 sm:py-32" ref={ref}>
@@ -52,12 +39,9 @@ export function InstagramSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="w-full mb-10 flex justify-center"
         >
-          {/* Cole aqui o widget code do Behold */}
-          {/* Crie em: https://behold.so/ */}
-          <div
-            className="behold-embed"
-            data-behold-id="COLOQUE_SEU_WIDGET_ID_AQUI"
-          />
+          {/* Novo elemento customizado do Behold com o ID da sua imagem */}
+          {/* @ts-ignore */}
+          <behold-widget feed-id="CxN1YyvFbYBfHEL5enWS" class="w-full" />
         </motion.div>
 
         <motion.div
@@ -83,6 +67,13 @@ export function InstagramSection() {
           </Button>
         </motion.div>
       </div>
+
+      {/* Novo script do Behold configurado como módulo para Next.js */}
+      <Script
+        src="https://w.behold.so/widget.js"
+        type="module"
+        strategy="afterInteractive"
+      />
     </section>
   )
 }

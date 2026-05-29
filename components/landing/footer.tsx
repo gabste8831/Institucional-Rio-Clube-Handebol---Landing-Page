@@ -28,7 +28,7 @@ export function Footer() {
                 <span className="h-2 w-2 rounded-full bg-azul" />
               </div>
               <span className="font-serif text-xl font-semibold tracking-tight">
-                Handebol Rio do Sul
+                Rio Clube Handebol
               </span>
             </Link>
             <p className="text-background/70 max-w-md mb-6 leading-relaxed">
