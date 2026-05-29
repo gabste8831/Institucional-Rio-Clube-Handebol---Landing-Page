@@ -42,14 +42,9 @@ export function ContactSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="contato" className="py-24 bg-secondary/50 relative overflow-hidden" ref={ref}>
-      {/* Elementos decorativos de fundo */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-verde rounded-full filter blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-azul rounded-full filter blur-3xl" />
-      </div>
+    <section id="contato" className="py-24 bg-secondary/50" ref={ref}>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         {/* Cabeçalho da Seção */}
         <motion.div

@@ -148,9 +148,8 @@ export function TrainingSection() {
                 {schedule.map((item, index) => (
                   <div
                     key={item.day}
-                    className={`p-6 flex items-center justify-between ${
-                      index !== schedule.length - 1 ? "border-b border-border/50" : ""
-                    }`}
+                    className={`p-6 flex items-center justify-between ${index !== schedule.length - 1 ? "border-b border-border/50" : ""
+                      }`}
                   >
                     <div>
                       <p className="font-sans font-normal tracking-wide text-base">{item.day}</p>
@@ -194,6 +193,10 @@ export function TrainingSection() {
             ))}
           </motion.div>
         </div>
+
+        <span className="text-center inline-block text-sm uppercase w-full tracking-widest text-muted-foreground font-medium mb-4">
+          Locais de treino
+        </span>
 
         {/* Venues Carousel */}
         <motion.div
@@ -272,11 +275,10 @@ export function TrainingSection() {
                   duration: 0.3,
                   ease: "easeInOut"
                 }}
-                className={`h-1 cursor-pointer rounded-full transition-all ${
-                  selectedIndex === index 
-                    ? 'bg-amarelo' 
-                    : 'bg-muted-foreground/30'
-                }`}
+                className={`h-1 cursor-pointer rounded-full transition-all ${selectedIndex === index
+                  ? 'bg-amarelo'
+                  : 'bg-muted-foreground/30'
+                  }`}
                 whileHover={{ scale: 1.1 }}
               />
             ))}

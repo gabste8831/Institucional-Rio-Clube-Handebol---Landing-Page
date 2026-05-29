@@ -54,8 +54,8 @@ export function InstagramSection() {
         >
           {/* Cole aqui o widget code do Behold */}
           {/* Crie em: https://behold.so/ */}
-          <div 
-            className="behold-embed" 
+          <div
+            className="behold-embed"
             data-behold-id="COLOQUE_SEU_WIDGET_ID_AQUI"
           />
         </motion.div>

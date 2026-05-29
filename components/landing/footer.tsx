@@ -32,7 +32,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-background/70 max-w-md mb-6 leading-relaxed">
-              Projeto esportivo comunitário que promove a prática do handebol para todas as idades. 
+              Projeto esportivo comunitário que promove a prática do handebol para todas as idades.
               Treinos gratuitos, competições regionais e muito mais. Venha fazer parte do time!
             </p>
             <div className="flex items-center gap-4">
@@ -105,7 +105,7 @@ export function Footer() {
                 <Mail className="h-5 w-5 shrink-0 text-background/50" />
                 <a
                   href="mailto:contato@handebolriodosul.com"
-                  className="text-background/70 hover:text-background transition-colors text-sm"
+                  className="text-background/70 hover:text-background break-all transition-colors text-sm"
                 >
                   contato@handebolriodosul.com
                 </a>
@@ -120,7 +120,7 @@ export function Footer() {
             © {new Date().getFullYear()} Handebol Rio do Sul. Todos os direitos reservados.
           </p>
           <p className="text-sm text-background/50 flex items-center gap-1">
-            Feito com <Heart className="h-4 w-4 text-red-400" /> em Rio do Sul
+            Feito por Gabriel Steffens
           </p>
         </div>
       </div>

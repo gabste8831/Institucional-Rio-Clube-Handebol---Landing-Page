@@ -28,35 +28,34 @@ export function RealizationSection() {
             <span className="inline-block text-sm uppercase tracking-widest text-amarelo font-medium">
               Realização & Parceria
             </span>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-4xl font-medium tracking-tight text-foreground text-balance">
+            <h2 className="font-serif text-4xl sm:text-5xl font-medium tracking-tight text-foreground text-balance">
               Uma aliança dedicada ao{" "}
               <span className="text-muted-foreground">fomento do esporte</span>
             </h2>
             <p className="text-base text-muted-foreground leading-relaxed max-w-xl mx-auto">
               O Rio Clube Handebol atua em parceria direta com a{" "}
-              <strong>Fundação Municipal de Esportes (FME) de Rio do Sul</strong>,
+              <strong>Fundação Municipal de Esportes (FMD) de Rio do Sul</strong>,
               unindo o fomento institucional ao desenvolvimento desportivo e social de nossos jovens.
             </p>
           </motion.div>
 
-          {/* Coluna de Logos (Direita) */}
+          {/* Logos - Versão Desktop (600px+): cards lado a lado */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-row items-center justify-center gap-6 mx-auto w-full"
+            className="hidden min-[600px]:flex flex-row items-center justify-center gap-6 mx-auto w-full"
           >
             {/* Logo Rio Clube Handebol */}
             <motion.div
-              whileHover={{ y: -5 }}
-              className="w-48 h-48 sm:w-56 sm:h-56 rounded-2xl bg-white dark:bg-zinc-950 border border-border/80 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center p-4 sm:p-6 text-center group shrink-0"
+              className="w-48 h-48 sm:w-56 sm:h-56 rounded-2xl bg-white hover:bg-secondary/50 dark:bg-zinc-950 hover:dark:bg-secondary/50 border border-border/80 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center p-4 sm:p-6 text-center group shrink-0"
             >
               <div className="relative w-28 h-28 sm:w-40 sm:h-40 mb-1 sm:mb-2 flex items-center justify-center">
                 <Image
                   src="/images/logo_rio_clube.png"
                   alt="Logo Rio Clube Handebol"
                   fill
-                  className="object-contain transition-transform duration-300 group-hover:scale-105"
+                  className="object-contain transition-transform duration-300"
                 />
               </div>
               <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground select-none">
@@ -71,22 +70,89 @@ export function RealizationSection() {
 
             {/* Logo Fundação Municipal de Esportes */}
             <motion.div
-              whileHover={{ y: -5 }}
-              className="w-48 h-48 sm:w-56 sm:h-56 rounded-2xl bg-white dark:bg-zinc-950 border border-border/80 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center p-4 sm:p-6 text-center group shrink-0"
+              className="w-48 h-48 sm:w-56 sm:h-56 rounded-2xl hover:bg-secondary/50 dark:bg-zinc-950 hover:dark:bg-secondary/50 border border-border/80 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center p-4 sm:p-6 text-center group shrink-0"
             >
-              <div className="relative w-24 h-24 sm:w-36 sm:h-36 mb-1 sm:mb-2 flex items-center justify-center">
+              <div className="relative w-24 h-24 mb-1 flex items-center justify-center">
                 <Image
                   src="/images/logo_fundacao.png"
                   alt="Logo Fundação de Esportes"
                   fill
-                  className="object-contain transition-transform duration-300 group-hover:scale-105"
+                  className="object-contain transition-transform duration-300"
                 />
               </div>
               <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground select-none">
-                FME Rio do Sul
+                FMD Rio do Sul
               </span>
             </motion.div>
+          </motion.div>
 
+          {/* Logos - Versão Mobile (<600px): carrossel marquee */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="min-[600px]:hidden w-full"
+          >
+            <style dangerouslySetInnerHTML={{
+              __html: `
+              @keyframes marquee-realization {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
+              }
+              .animate-marquee-realization {
+                display: flex;
+                width: max-content;
+                animation: marquee-realization 20s linear infinite;
+              }
+            `}} />
+
+            <div className="w-full overflow-hidden relative py-4 select-none">
+              {/* Fade lateral */}
+              <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-secondary/30 to-transparent z-10 pointer-events-none" />
+              <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-secondary/30 to-transparent z-10 pointer-events-none" />
+
+              <div className="animate-marquee-realization flex gap-10 items-center">
+                {/* Grupo 1 */}
+                <div className="flex flex-col items-center gap-2 px-4 shrink-0">
+                  <div className="relative w-28 h-28">
+                    <Image src="/images/logo_rio_clube.png" alt="Logo Rio Clube Handebol" fill className="object-contain" />
+                  </div>
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground select-none">Rio Clube Handebol</span>
+                </div>
+                <div className="flex flex-col items-center gap-2 px-4 shrink-0">
+                  <div className="relative w-28 h-28">
+                    <Image src="/images/logo_fundacao.png" alt="Logo Fundação de Esportes" fill className="object-contain" />
+                  </div>
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground select-none">FMD Rio do Sul</span>
+                </div>
+                {/* Grupo 2 (duplicado para loop seamless) */}
+                <div className="flex flex-col items-center gap-2 px-4 shrink-0">
+                  <div className="relative w-28 h-28">
+                    <Image src="/images/logo_rio_clube.png" alt="Logo Rio Clube Handebol" fill className="object-contain" />
+                  </div>
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground select-none">Rio Clube Handebol</span>
+                </div>
+                <div className="flex flex-col items-center gap-2 px-4 shrink-0">
+                  <div className="relative w-28 h-28">
+                    <Image src="/images/logo_fundacao.png" alt="Logo Fundação de Esportes" fill className="object-contain" />
+                  </div>
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground select-none">FMD Rio do Sul</span>
+                </div>
+                {/* Grupo 3 (extra para preencher) */}
+                <div className="flex flex-col items-center gap-2 px-4 shrink-0">
+                  <div className="relative w-28 h-28">
+                    <Image src="/images/logo_rio_clube.png" alt="Logo Rio Clube Handebol" fill className="object-contain" />
+                  </div>
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground select-none">Rio Clube Handebol</span>
+                </div>
+                <div className="flex flex-col items-center gap-2 px-4 shrink-0">
+                  <div className="relative w-28 h-28">
+                    <Image src="/images/logo_fundacao.png" alt="Logo Fundação de Esportes" fill className="object-contain" />
+                  </div>
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground select-none">FMD Rio do Sul</span>
+                </div>
+              </div>
+            </div>
           </motion.div>
 
         </div>

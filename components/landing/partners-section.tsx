@@ -6,7 +6,7 @@ import { Building2, Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const currentPartners = [
-  { name: "FME Rio do Sul", logo: "/images/fme.png", type: "Institucional", darkInvert: true },
+  { name: "FMD Rio do Sul", logo: "/images/fmd.png", type: "Institucional", darkInvert: true },
   { name: "Prefeitura de Rio do Sul", logo: "/images/prefeitura.png", type: "Governamental", darkInvert: true },
   { name: "Empresa Parceira 1", logo: "/images/sponsor1.png", type: "Patrocinador", darkInvert: false },
   { name: "Empresa Parceira 2", logo: "/images/sponsor2.png", type: "Apoiador", darkInvert: false },
@@ -15,7 +15,7 @@ const currentPartners = [
 // Fallback component to render an elegant badge if PNG logo doesn't exist yet
 const PartnerLogo = ({ partner }: { partner: typeof currentPartners[0] }) => {
   const [hasError, setHasError] = useState(false)
-  
+
   if (hasError || !partner.logo) {
     return (
       <div className="flex items-center gap-2 px-6 py-3 rounded-xl bg-muted-foreground/5 border border-border/50 text-muted-foreground/60 select-none mx-2">
@@ -24,7 +24,7 @@ const PartnerLogo = ({ partner }: { partner: typeof currentPartners[0] }) => {
       </div>
     )
   }
-  
+
   return (
     <div className="h-16 flex items-center justify-center px-6">
       <img
@@ -44,7 +44,7 @@ export function PartnersSection() {
   return (
     <section id="parceiros" className="py-24 sm:py-32" ref={ref}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
+
         {/* Cabeçalho */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -74,9 +74,10 @@ export function PartnersSection() {
           <h3 className="text-center font-sans font-semibold text-xs tracking-wider uppercase text-muted-foreground mb-8">
             Nossos Parceiros Atuais
           </h3>
-          
+
           {/* Estilos injetados para o carrossel infinito e responsivo */}
-          <style dangerouslySetInnerHTML={{__html: `
+          <style dangerouslySetInnerHTML={{
+            __html: `
             @keyframes marquee {
               0% { transform: translateX(0); }
               100% { transform: translateX(-50%); }
@@ -96,7 +97,7 @@ export function PartnersSection() {
             {/* Sombras laterais para fade out suave das marcas */}
             <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
             <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-            
+
             <div className="animate-marquee-loop flex gap-12 items-center">
               {/* Grupo original de logos */}
               {currentPartners.map((partner) => (
@@ -124,20 +125,20 @@ export function PartnersSection() {
           <div className="relative rounded-2xl bg-muted-foreground/4 border border-border/70 p-8 sm:p-12 overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
             {/* Elemento decorativo discreto */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-azul/5 rounded-full filter blur-3xl pointer-events-none" />
-            
+
             <div className="flex-1 space-y-4 max-w-xl relative z-10">
               <span className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground font-semibold">
                 <Heart className="h-4 w-4 text-azul fill-azul/20" />
                 Apoie o Projeto
               </span>
               <h3 className="font-serif text-2xl sm:text-3xl font-medium tracking-tight text-foreground">
-                Sua marca jogando junto com o Rio do Sul
+                Sua marca jogando junto com Rio do Sul
               </h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Ao apoiar o Rio Clube Handebol, sua marca ganha destaque nos nossos uniformes oficiais, banners, bandeiras de eventos e redes sociais. Além disso, sua empresa contribui ativamente para o desenvolvimento social e desportivo de jovens na nossa região.
+                Ao apoiar o Rio Clube Handebol, sua marca ganha destaque nos nossos uniformes oficiais, banners, eventos e redes sociais. Além disso, sua empresa contribui ativamente para o desenvolvimento social e desportivo de jovens na nossa região.
               </p>
             </div>
-            
+
             <div className="shrink-0 relative z-10">
               <Button
                 asChild
