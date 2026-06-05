@@ -50,7 +50,7 @@ export function RealizationSection() {
             <motion.div
               className="w-48 h-48 sm:w-56 sm:h-56 rounded-2xl bg-white hover:bg-secondary/50 dark:bg-zinc-950 hover:dark:bg-secondary/50 border border-border/80 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center p-4 sm:p-6 text-center group shrink-0"
             >
-              <div className="relative w-34 h-34 sm:w-40 sm:h-40 mb-1 sm:mb-2 flex items-center justify-center">
+              <div className="relative w-34 h-34 sm:w-35 sm:h-35 mb-1 sm:mb-2 flex items-center justify-center">
                 <Image
                   src="/images/logo_rio_clube.png"
                   alt="Logo Rio Clube Handebol"
@@ -69,7 +69,7 @@ export function RealizationSection() {
             <motion.div
               className="w-48 h-48 sm:w-56 sm:h-56 rounded-2xl hover:bg-secondary/50 dark:bg-zinc-950 hover:dark:bg-secondary/50 border border-border/80 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center p-4 sm:p-6 text-center group shrink-0"
             >
-              <div className="relative w-34 h-34 mb-1 flex items-center justify-center">
+              <div className="relative w-45 h-45 sm:w-55 sm:h-55 mb-1 flex items-center justify-center">
                 <Image
                   src="/images/logo_fundacao.png"
                   alt="Logo Fundação de Esportes"
@@ -105,41 +105,26 @@ export function RealizationSection() {
               <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-secondary/30 to-transparent z-10 pointer-events-none" />
               <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-secondary/30 to-transparent z-10 pointer-events-none" />
 
-              <div className="animate-marquee-realization flex gap-10 items-center">
-                {/* Grupo 1 */}
-                <div className="flex flex-col items-center gap-2 px-4 shrink-0">
-                  <div className="relative w-34 h-34">
-                    <Image src="/images/logo_rio_clube.png" alt="Logo Rio Clube Handebol" fill className="object-contain" />
+              {(() => {
+                const mobileLogos = [
+                  { src: "/images/logo_rio_clube.png", alt: "Logo Rio Clube Handebol", size: "w-34 h-34" },
+                  { src: "/images/logo_fundacao.png", alt: "Logo Fundação de Esportes", size: "w-55 h-55" },
+                ]
+                // Repetir 3x para garantir loop seamless no marquee
+                return (
+                  <div className="animate-marquee-realization flex gap-10 items-center">
+                    {Array.from({ length: 3 }).flatMap((_, groupIndex) =>
+                      mobileLogos.map((logo, logoIndex) => (
+                        <div key={`${groupIndex}-${logoIndex}`} className="flex flex-col items-center gap-2 px-4 shrink-0">
+                          <div className={`relative ${logo.size}`}>
+                            <Image src={logo.src} alt={logo.alt} fill className="object-contain" />
+                          </div>
+                        </div>
+                      ))
+                    )}
                   </div>
-                </div>
-                <div className="flex flex-col items-center gap-2 px-4 shrink-0">
-                  <div className="relative w-34 h-34">
-                    <Image src="/images/logo_fundacao.png" alt="Logo Fundação de Esportes" fill className="object-contain" />
-                  </div>
-                </div>
-                {/* Grupo 2 (duplicado para loop seamless) */}
-                <div className="flex flex-col items-center gap-2 px-4 shrink-0">
-                  <div className="relative w-34 h-34">
-                    <Image src="/images/logo_rio_clube.png" alt="Logo Rio Clube Handebol" fill className="object-contain" />
-                  </div>
-                </div>
-                <div className="flex flex-col items-center gap-2 px-4 shrink-0">
-                  <div className="relative w-34 h-34">
-                    <Image src="/images/logo_fundacao.png" alt="Logo Fundação de Esportes" fill className="object-contain" />
-                  </div>
-                </div>
-                {/* Grupo 3 (extra para preencher) */}
-                <div className="flex flex-col items-center gap-2 px-4 shrink-0">
-                  <div className="relative w-34 h-34">
-                    <Image src="/images/logo_rio_clube.png" alt="Logo Rio Clube Handebol" fill className="object-contain" />
-                  </div>
-                </div>
-                <div className="flex flex-col items-center gap-2 px-4 shrink-0">
-                  <div className="relative w-34 h-34">
-                    <Image src="/images/logo_fundacao.png" alt="Logo Fundação de Esportes" fill className="object-contain" />
-                  </div>
-                </div>
-              </div>
+                )
+              })()}
             </div>
           </motion.div>
 

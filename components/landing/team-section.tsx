@@ -38,59 +38,67 @@ const coordinators = [
     instagram: "@siilva.igord",
     image: "/images/igor.png",
   },
+  {
+    name: "Samuel",
+    role: "Financeiro",
+    description: "Responsável pelas finanças do projeto.",
+    phone: "(47) 90000-0000",
+    email: "samuel@gmail.com",
+    instagram: "@samuel",
+    image: "/images/samuel.jpg",
+  },
 ]
 
 export function TeamSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
-  
+
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
-      loop: false, // Mantido false para evitar bugs visuais com poucos cards no desktop
-      align: "center",
+      loop: true, // Loop infinito — com 4 cards funciona perfeitamente sem bugs visuais
+      align: "start",
       skipSnaps: false,
-      duration: 40, // Velocidade da transição de deslize
+      duration: 30, // Transição suave e rápida
     },
     [
       Autoplay({
         playOnInit: true,
-        delay: 5000, // 5 segundos exatos para cada card
-        stopOnInteraction: true,
-        stopOnMouseEnter: false,
-        stopOnLastSnap: false, // O segredo: faz o autoplay voltar ao início nativamente sem travar
+        delay: 5000, // 5 segundos para cada card
+        stopOnInteraction: false, // Continua rodando mesmo após interação do usuário
+        stopOnMouseEnter: true, // Pausa ao passar o mouse (UX melhor)
       }),
     ]
   )
-  
+
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const [canScrollPrev, setCanScrollPrev] = useState(false)
-  const [canScrollNext, setCanScrollNext] = useState(false)
-  const [showNavigation, setShowNavigation] = useState(false)
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([])
 
   useEffect(() => {
     if (!emblaApi) return
 
     const onSelect = () => {
       setSelectedIndex(emblaApi.selectedScrollSnap())
-      setCanScrollPrev(emblaApi.canScrollPrev())
-      setCanScrollNext(emblaApi.canScrollNext())
-      setShowNavigation(emblaApi.canScrollPrev() || emblaApi.canScrollNext())
     }
-    
-    onSelect()
+
+    const onInit = () => {
+      setScrollSnaps(emblaApi.scrollSnapList())
+      onSelect()
+    }
+
+    onInit()
     emblaApi.on("select", onSelect)
-    emblaApi.on("reInit", onSelect)
+    emblaApi.on("reInit", onInit)
 
     return () => {
       emblaApi.off("select", onSelect)
-      emblaApi.off("reInit", onSelect)
+      emblaApi.off("reInit", onInit)
     }
   }, [emblaApi])
 
   return (
     <section id="equipe" className="py-24 sm:py-32" ref={ref}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
+
         {/* Cabeçalho */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -106,7 +114,7 @@ export function TeamSection() {
             <span className="text-muted-foreground">Projeto</span>
           </h2>
           <p className="max-w-2xl mx-auto text-base text-muted-foreground text-pretty">
-            Profissionais dedicados que fazem o projeto acontecer, 
+            Profissionais dedicados que fazem o projeto acontecer,
             compartilhando conhecimento e paixão pelo handebol.
           </p>
         </motion.div>
@@ -117,15 +125,15 @@ export function TeamSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <div 
-            className="overflow-hidden rounded-xl" 
+          <div
+            className="overflow-hidden rounded-xl"
             ref={emblaRef}
           >
             <div className="flex -ml-4">
               {coordinators.map((coordinator) => (
                 <div
                   key={coordinator.name}
-                  className="flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] pl-4 min-w-0"
+                  className="flex-[0_0_85%] sm:flex-[0_0_50%] lg:flex-[0_0_25%] pl-4 min-w-0"
                 >
                   <Card className="h-full overflow-hidden group hover:shadow-lg transition-all duration-300 border-border hover:border-amarelo/50">
                     <div className="aspect-[4/3] bg-gradient-to-br from-verde/20 to-azul/20 relative overflow-hidden">
@@ -141,29 +149,31 @@ export function TeamSection() {
                         <div className="flex-1 bg-azul" />
                       </div>
                     </div>
-                    <CardContent>
-                      <div className="mb-4">
-                        <h3 className="font-semibold text-lg">{coordinator.name}</h3>
-                        <p className="text-sm text-verde font-medium">{coordinator.role}</p>
-                      </div>
-                      
-                      {coordinator.cref && (
-                        <p className="text-foreground text-sm mb-2 leading-relaxed dark:text-white">
-                          {coordinator.cref}
-                        </p>
-                      )}
-                      
-                      <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
-                        {coordinator.description}
-                      </p>
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <Phone className="h-4 w-4" />
-                          <span>{coordinator.phone}</span>
+                    <CardContent className="flex-1 flex flex-col">
+                      <div className="flex-1">
+                        <div className="mb-4">
+                          <h3 className="font-semibold text-lg">{coordinator.name}</h3>
+                          <p className="text-sm text-verde font-medium">{coordinator.role}</p>
                         </div>
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <Mail className="h-4 w-4" />
-                          <span className="truncate">{coordinator.email}</span>
+
+                        {coordinator.cref && (
+                          <p className="text-foreground text-sm mb-2 leading-relaxed dark:text-white">
+                            {coordinator.cref}
+                          </p>
+                        )}
+
+                        <p className="text-muted-foreground text-xs mb-6 leading-relaxed">
+                          {coordinator.description}
+                        </p>
+                        <div className="space-y-2">
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <Phone className="h-4 w-4" />
+                            <span>{coordinator.phone}</span>
+                          </div>
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <Mail className="h-4 w-4" />
+                            <span className="truncate">{coordinator.email}</span>
+                          </div>
                         </div>
                       </div>
                       <Button
@@ -189,18 +199,14 @@ export function TeamSection() {
           </div>
 
           {/* Navegação */}
-          {showNavigation && (
+          {scrollSnaps.length > 1 && (
             <div className="flex flex-col items-center gap-6 mt-8">
               <div className="flex justify-center gap-2">
-                {coordinators.map((_, index) => (
+                {scrollSnaps.map((_, index) => (
                   <motion.div
                     key={index}
                     onClick={() => {
                       emblaApi?.scrollTo(index)
-                      const autoplayPlugin = emblaApi?.plugins()?.autoplay as any
-                      if (autoplayPlugin && typeof autoplayPlugin.play === 'function') {
-                        autoplayPlugin.play()
-                      }
                     }}
                     animate={{
                       width: selectedIndex === index ? 32 : 8,
@@ -209,11 +215,10 @@ export function TeamSection() {
                       duration: 0.3,
                       ease: "easeInOut"
                     }}
-                    className={`h-1 cursor-pointer rounded-full transition-all ${
-                      selectedIndex === index 
-                        ? 'bg-amarelo' 
-                        : 'bg-muted-foreground/30'
-                    }`}
+                    className={`h-1 cursor-pointer rounded-full transition-all ${selectedIndex === index
+                      ? 'bg-amarelo'
+                      : 'bg-muted-foreground/30'
+                      }`}
                     whileHover={{ scale: 1.1 }}
                   />
                 ))}

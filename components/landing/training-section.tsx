@@ -135,7 +135,7 @@ export function TrainingSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="h-full"
           >
-            <div className="rounded-2xl bg-muted-foreground/6 border border-border/70 overflow-hidden h-full flex flex-col">
+            <div className="rounded-2xl bg-muted-foreground/6 border border-border/70 overflow-hidden h-full flex flex-col hover:bg-muted-foreground/4">
               <div className="p-6 border-b border-border/50">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg bg-muted-foreground/10 flex items-center justify-center">
@@ -148,7 +148,7 @@ export function TrainingSection() {
                 {schedule.map((item, index) => (
                   <div
                     key={item.day}
-                    className={`p-6 flex items-center justify-between ${index !== schedule.length - 1 ? "border-b border-border/50" : ""
+                    className={`p-6 flex items-center justify-between transition-colors duration-500 hover:bg-muted-foreground/8 ${index !== schedule.length - 1 ? "border-b border-border/50" : ""
                       }`}
                   >
                     <div>
