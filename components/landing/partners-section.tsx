@@ -5,35 +5,59 @@ import { useRef, useState } from "react"
 import { Building2, Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
+const basePath = "/images/Logos Apoiadores do Projeto Rio Clube"
+
 const currentPartners = [
-  { name: "FMD Rio do Sul", logo: "/images/logo_rio_clube.png", type: "Institucional" },
-  { name: "Prefeitura de Rio do Sul", logo: "/images/logo_rio_clube.png", type: "Governamental" },
-  { name: "Empresa Parceira 1", logo: "/images/logo_rio_clube.png", type: "Patrocinador" },
-  { name: "Empresa Parceira 2", logo: "/images/logo_rio_clube.png", type: "Apoiador" },
+  { name: "Perito Hash", logoLight: `${basePath}/peritohash-lightmode.png`, logoDark: `${basePath}/peritohash-darkmode.png`, url: "https://www.instagram.com/peritohash/" },
+  { name: "Pe Pratic", logoLight: `${basePath}/pepratic-lightmode.png`, logoDark: `${basePath}/pepratic-darmode.png`, url: "https://www.instagram.com/pepratic/" },
+  { name: "Leve Fitness", logoLight: `${basePath}/letefitness-lightmode.png`, logoDark: `${basePath}/levefitness-darkmode.png`, url: "https://www.instagram.com/leve.fitness__/" },
+  { name: "Agência Hapi", logoLight: `${basePath}/hapi-lightmode.png`, logoDark: `${basePath}/hapi-darkmode.png`, url: "https://www.instagram.com/agenciahapi/" },
+  { name: "Grupo Planner", logoLight: `${basePath}/grupoplanner-lightmode.png`, logoDark: `${basePath}/grupoplanner-darkmode.png`, url: "https://www.instagram.com/grupoplanner/" },
+  { name: "Marmoraria Granicar", logoLight: `${basePath}/granicarmarmoraria-lighmode.png`, logoDark: `${basePath}/granicarmarmoraria-darkmode.png`, url: "https://www.instagram.com/marmorariagranicar/" },
+  { name: "Essenza Detail", logoLight: `${basePath}/essenzadetail-lightmode.png`, logoDark: `${basePath}/essenzadetail-darkmode.png`, url: "https://www.instagram.com/essenza_detail/" },
+  { name: "Don Ruan Pizza e Burger", logoLight: `${basePath}/donjuan-lightmode.png`, logoDark: `${basePath}/donruan-darkmode.png`, url: "https://www.instagram.com/donruanpizzaeburger/" },
+  { name: "Cia Man Cuecas", logoLight: `${basePath}/ciaman-lightmode.png`, logoDark: `${basePath}/ciaman-darmode.png`, url: "https://www.facebook.com/ciamancuecas/?locale=pt_BR" },
+  { name: "Alto Vale Contabilidade", logoLight: `${basePath}/altovalecontabilidade-lightmode.png`, logoDark: `${basePath}/altovalecontabilidade-darkmode.png`, url: "https://www.instagram.com/altovalecontabilidade/" },
+  { name: "Zatom Formiga", logoLight: `${basePath}/zatom-lightmode.png`, logoDark: `${basePath}/zatom-darkmode.png`, url: "https://www.instagram.com/zatomformiga/" },
+  { name: "W9 TI Tecnologia", logoLight: `${basePath}/w9solucoesemti - lightmode.png`, logoDark: `${basePath}/w9solucoesemti-darkmode.png`, url: "https://www.instagram.com/w9titecnologia/" },
+  { name: "ULC Terraplanagem", logoLight: `${basePath}/ulcterraplanagem-lightmode.png`, logoDark: `${basePath}/ulcterraplanagem-darkmode.png`, url: "https://www.instagram.com/ulcterraplanagem/" },
+  { name: "Sicoob Alto Vale", logoLight: `${basePath}/sicobaltovale-lightmode.png`, logoDark: `${basePath}/sicobaltovale-darkmode.png`, url: "https://www.instagram.com/sicoobaltovale/" },
+  { name: "Senior Engenharia e Medicina", logoLight: `${basePath}/seniorengenhariaesegurançadotrabalho-lightmode.png`, logoDark: `${basePath}/seniorengenhariaesegurançadotrabalho-darkmode.png`, url: "https://www.instagram.com/seniorengenhariaemedicina/" },
+  { name: "Requinte Lavanderia", logoLight: `${basePath}/requintelavanderia-lightmode.png`, logoDark: `${basePath}/requintelavanderia-darkmode.png`, url: "https://www.instagram.com/requintelavanderia/" },
+  { name: "Qualitte 50+", logoLight: `${basePath}/qualiteaposentadorias-lightmode.png`, logoDark: `${basePath}/qualiteaposentadorias-darkmode.png`, url: "https://www.instagram.com/qualitte50mais/" },
+  { name: "WA Concreto", logoLight: `${basePath}/waconcreto - lightmode.png`, logoDark: `${basePath}/waconcreto - darkmode.png`, url: "https://www.instagram.com/waconcreto/" },
 ]
 
 // Fallback component to render an elegant badge if PNG logo doesn't exist yet
 const PartnerLogo = ({ partner }: { partner: typeof currentPartners[0] }) => {
   const [hasError, setHasError] = useState(false)
 
-  if (hasError || !partner.logo) {
+  if (hasError || !partner.logoLight) {
     return (
-      <div className="flex items-center gap-2 px-6 py-3 rounded-xl bg-muted-foreground/5 border border-border/50 text-muted-foreground/60 select-none mx-2">
+      <a href={partner.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 rounded-xl bg-muted-foreground/5 border border-border/50 text-muted-foreground/60 select-none mx-2 hover:bg-muted-foreground/10 transition-colors">
         <Building2 className="h-4 w-4" />
         <span className="font-sans font-semibold text-[11px] tracking-wider uppercase whitespace-nowrap">{partner.name}</span>
-      </div>
+      </a>
     )
   }
 
+  const imageClass = "h-auto max-h-[140px] w-auto max-w-[220px] md:max-h-[150px] md:max-w-[260px] object-contain transition-all duration-300 md:grayscale md:opacity-60 md:dark:opacity-45 hover:!opacity-100 hover:!grayscale-0"
+
   return (
-    <div className="h-40 flex items-center justify-center px-6">
+    <a href={partner.url} target="_blank" rel="noopener noreferrer" className="h-48 flex items-center justify-center px-2 md:px-8">
       <img
-        src={partner.logo}
+        src={partner.logoLight}
         alt={partner.name}
         onError={() => setHasError(true)}
-        className={`h-34 w-auto max-w-[150px] object-contain grayscale opacity-60 dark:opacity-45 hover:opacity-100 hover:grayscale-0 dark:hover:opacity-100 transition-all duration-300 `}
+        className={`${imageClass} dark:hidden`}
       />
-    </div>
+      <img
+        src={partner.logoDark}
+        alt={partner.name}
+        onError={() => setHasError(true)}
+        className={`${imageClass} hidden dark:block`}
+      />
+    </a>
   )
 }
 
@@ -85,17 +109,19 @@ export function PartnersSection() {
             .animate-marquee-loop {
               display: flex;
               width: max-content;
-              animation: marquee 25s linear infinite;
+              animation: marquee 120s linear infinite;
             }
           `}} />
 
           {/* Ribbon do Carrossel */}
-          <div className="w-full overflow-hidden relative py-4 select-none">
-            {/* Sombras laterais para fade out suave das marcas */}
-            <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-            <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-
-            <div className="animate-marquee-loop flex gap-12 items-center">
+          <div
+            className="w-full overflow-hidden relative py-4 select-none"
+            style={{
+              maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
+              WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)'
+            }}
+          >
+            <div className="animate-marquee-loop flex gap-10 md:gap-16 items-center">
               {/* Grupo original de logos */}
               {currentPartners.map((partner) => (
                 <PartnerLogo key={partner.name} partner={partner} />

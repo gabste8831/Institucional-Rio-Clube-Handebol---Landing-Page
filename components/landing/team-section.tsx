@@ -56,7 +56,7 @@ export function TeamSection() {
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       loop: true, // Loop infinito — com 4 cards funciona perfeitamente sem bugs visuais
-      align: "start",
+      align: "center",
       skipSnaps: false,
       duration: 30, // Transição suave e rápida
     },

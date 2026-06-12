@@ -47,7 +47,10 @@ export function RealizationSection() {
             className="hidden min-[600px]:flex flex-row items-center justify-center gap-6 mx-auto w-full"
           >
             {/* Logo Rio Clube Handebol */}
-            <motion.div
+            <motion.a
+              href="https://www.instagram.com/rioclube_handebol/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-48 h-48 sm:w-56 sm:h-56 rounded-2xl bg-white hover:bg-secondary/50 dark:bg-zinc-950 hover:dark:bg-secondary/50 border border-border/80 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center p-4 sm:p-6 text-center group shrink-0"
             >
               <div className="relative w-34 h-34 sm:w-35 sm:h-35 mb-1 sm:mb-2 flex items-center justify-center">
@@ -58,7 +61,7 @@ export function RealizationSection() {
                   className="object-contain transition-transform duration-300"
                 />
               </div>
-            </motion.div>
+            </motion.a>
 
             {/* Elemento Conector Dinâmico */}
             <div className="flex items-center justify-center w-8 h-8 rounded-full bg-muted-foreground/10 text-muted-foreground font-bold text-sm select-none shrink-0">
@@ -66,8 +69,11 @@ export function RealizationSection() {
             </div>
 
             {/* Logo Fundação Municipal de Esportes */}
-            <motion.div
-              className="w-48 h-48 sm:w-56 sm:h-56 rounded-2xl hover:bg-secondary/50 dark:bg-zinc-950 hover:dark:bg-secondary/50 border border-border/80 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center p-4 sm:p-6 text-center group shrink-0"
+            <motion.a
+              href="https://www.instagram.com/semelriodosul/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-48 h-48 sm:w-56 sm:h-56 rounded-2xl bg-white hover:bg-secondary/50 dark:bg-zinc-950 hover:dark:bg-secondary/50 border border-border/80 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center p-4 sm:p-6 text-center group shrink-0"
             >
               <div className="relative w-45 h-45 sm:w-55 sm:h-55 mb-1 flex items-center justify-center">
                 <Image
@@ -77,7 +83,7 @@ export function RealizationSection() {
                   className="object-contain transition-transform duration-300"
                 />
               </div>
-            </motion.div>
+            </motion.a>
           </motion.div>
 
           {/* Logos - Versão Mobile (<600px): carrossel marquee */}
@@ -100,26 +106,35 @@ export function RealizationSection() {
               }
             `}} />
 
-            <div className="w-full overflow-hidden relative py-4 select-none">
-              {/* Fade lateral */}
-              <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-secondary/30 to-transparent z-10 pointer-events-none" />
-              <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-secondary/30 to-transparent z-10 pointer-events-none" />
+            <div 
+              className="w-full overflow-hidden relative py-4 select-none"
+              style={{ 
+                maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)', 
+                WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)' 
+              }}
+            >
 
               {(() => {
                 const mobileLogos = [
-                  { src: "/images/logo_rio_clube.png", alt: "Logo Rio Clube Handebol", size: "w-34 h-34" },
-                  { src: "/images/logo_fundacao.png", alt: "Logo Fundação de Esportes", size: "w-55 h-55" },
+                  { src: "/images/logo_rio_clube.png", alt: "Logo Rio Clube Handebol", size: "w-34 h-34", href: "https://www.instagram.com/rioclube_handebol/" },
+                  { src: "/images/logo_fundacao.png", alt: "Logo Fundação de Esportes", size: "w-55 h-55", href: "https://www.instagram.com/semelriodosul/" },
                 ]
                 // Repetir 3x para garantir loop seamless no marquee
                 return (
                   <div className="animate-marquee-realization flex gap-10 items-center">
                     {Array.from({ length: 3 }).flatMap((_, groupIndex) =>
                       mobileLogos.map((logo, logoIndex) => (
-                        <div key={`${groupIndex}-${logoIndex}`} className="flex flex-col items-center gap-2 px-4 shrink-0">
+                        <a 
+                          key={`${groupIndex}-${logoIndex}`} 
+                          href={logo.href} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="flex flex-col items-center gap-2 px-4 shrink-0"
+                        >
                           <div className={`relative ${logo.size}`}>
                             <Image src={logo.src} alt={logo.alt} fill className="object-contain" />
                           </div>
-                        </div>
+                        </a>
                       ))
                     )}
                   </div>
