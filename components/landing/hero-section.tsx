@@ -20,11 +20,11 @@ export function HeroSection() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/80 to-background" />
       </div>
-      
+
       {/* Decorative Elements */}
       <div className="absolute top-20 left-10 w-72 h-72 bg-verde/5 rounded-full blur-3xl" />
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-azul/5 rounded-full blur-3xl" />
-      
+
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-32">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -60,10 +60,10 @@ export function HeroSection() {
             transition={{ delay: 0.4 }}
             className="max-w-2xl mx-auto text-base sm:text-xl text-muted-foreground text-pretty mb-10"
           >
-            Projeto esportivo pela fundação de esportes da cidade,
-            que oferece treinos gratuitos para crianças, jovens e adultos. 
-            Venha desenvolver seu talento e fazer parte do 
-            time principal de handebol da cidade.
+            Projeto esportivo pela Secretaria Municipal de Esporte e Lazer de Rio do Sul,
+            que oferece treinos gratuitos para crianças, jovens e adultos.
+            Venha desenvolver seu talento e fazer parte do
+            time oficial de handebol da cidade.
           </motion.p>
 
           {/* CTA Buttons */}

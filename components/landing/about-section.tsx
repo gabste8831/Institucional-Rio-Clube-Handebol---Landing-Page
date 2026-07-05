@@ -24,7 +24,7 @@ const features = [
   {
     icon: Heart,
     title: "100% Gratuito",
-    description: "Projeto oficial da Fundação de Esportes de Rio do Sul. Participação totalmente gratuita para a comunidade.",
+    description: "Projeto oficial da Semel de Rio do Sul. Participação totalmente gratuita para a comunidade.",
   },
 ]
 
@@ -49,7 +49,7 @@ export function AboutSection() {
             <span className="text-muted-foreground">uma comunidade</span>
           </h2>
           <p className="max-w-2xl text-base text-muted-foreground text-pretty mx-auto my-0">
-            O <b>Rio Clube Handebol</b> é um projeto que vai além das quadras. Formamos atletas, 
+            O <b>Rio Clube Handebol</b> é um projeto que vai além das quadras. Formamos atletas,
             construímos amizades e fortalecemos nossa comunidade através do esporte.
           </p>
         </motion.div>

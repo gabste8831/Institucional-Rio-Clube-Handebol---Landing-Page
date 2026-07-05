@@ -9,9 +9,26 @@ import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
 
 const schedule = [
-  { day: "Segunda-feira", time: "19:00 - 21:00", type: "Treino Técnico" },
-  { day: "Quarta-feira", time: "19:00 - 21:00", type: "Treino Tático" },
-  { day: "Sexta-feira", time: "19:00 - 21:00", type: "Treino Livre/Jogo" },
+  {
+    day: "Segunda-feira",
+    classes: [
+      { name: "Infantil", time: "18:00 - 19:00" },
+      { name: "Adulto", time: "19:00 - 21:00" }
+    ]
+  },
+  {
+    day: "Quarta-feira",
+    classes: [
+      { name: "Infantil", time: "18:00 - 19:00" },
+      { name: "Adulto", time: "19:00 - 21:00" }
+    ]
+  },
+  {
+    day: "Sábado",
+    classes: [
+      { name: "Adulto", time: "08:00 - 10:00" }
+    ]
+  },
 ]
 
 const trainingTypes = [
@@ -51,7 +68,7 @@ const venues = [
     name: "Centro Universitário de Rio do Sul - UNIDAVI",
     address: "R. Júlio Roussenq Filho, 87-253 - Jardim América, Rio do Sul - SC, 89160-000",
     description: "Espaço dedicado ao treinamento técnico e desenvolvimento dos atletas.",
-    image: "/images/ginasiopz.png",
+    image: "/images/unidavi.jpg ",
     mapsUrl: "https://maps.app.goo.gl/z2DWVCKeCeGzW8oc8",
   },
   {
@@ -61,6 +78,14 @@ const venues = [
     description: "Quadra auxiliar para treinos adicionais e competições locais.",
     image: "/images/ifcriodosul.png",
     mapsUrl: "https://maps.app.goo.gl/gsVmUfJZEwdWHyBy9",
+  },
+  {
+    id: 4,
+    name: "Escola de Ensino Básico Paulo Zimmermann",
+    address: "R. São João, 115 - Centro, Rio do Sul - SC, 89160-147",
+    description: "Quadra auxiliar para treinos adicionais e competições locais.",
+    image: "/images/ginasiopz.png",
+    mapsUrl: "https://maps.app.goo.gl/3oVTy5HrjDmKUAJe8",
   },
 ]
 
@@ -148,16 +173,22 @@ export function TrainingSection() {
                 {schedule.map((item, index) => (
                   <div
                     key={item.day}
-                    className={`p-6 flex items-center justify-between transition-colors duration-500 hover:bg-muted-foreground/8 ${index !== schedule.length - 1 ? "border-b border-border/50" : ""
+                    className={`p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-colors duration-500 hover:bg-muted-foreground/8 ${index !== schedule.length - 1 ? "border-b border-border/50" : ""
                       }`}
                   >
                     <div>
                       <p className="font-sans font-normal tracking-wide text-base">{item.day}</p>
-                      <p className="text-sm text-muted-foreground">{item.type}</p>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Clock className="h-4 w-4 text-foreground dark:text-white" />
-                      <span className=" text-base text-muted-foreground/70" >{item.time}</span>
+                    <div className="flex flex-col gap-2 w-full sm:w-auto">
+                      {item.classes.map((c) => (
+                        <div key={c.name} className="flex items-center justify-between sm:justify-end gap-4 text-sm text-muted-foreground">
+                          <span className="font-medium text-foreground/80">{c.name}</span>
+                          <div className="flex items-center gap-2">
+                            <Clock className="h-4 w-4 text-foreground dark:text-white" />
+                            <span className="text-base text-muted-foreground/70">{c.time}</span>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 ))}

@@ -14,18 +14,40 @@ const coordinators = [
     name: "Eliani Finger Patzlaff",
     role: "Coordenadora",
     description: "Responsável pela organização geral e desenvolvimento técnico dos atletas.",
-    cref: "CREF: 123456",
-    phone: "(47) 99999-0001",
-    email: "eliani@handebolriodosul.com",
+    cref: "CREF: 4606",
+    phone: "(47) 9 9740-9924",
     instagram: "@elianipatzlaff",
     image: "/images/eliani.png",
+  },
+  {
+    name: "Samuel Simon",
+    role: "Presidente do Clube",
+    description: "Representante legal do clube. Responsável pela organização financeira, captação de recursos e coordenação logística/social do projeto.",
+    phone: "(47) 9 9678-0251",
+    instagram: "@engcivilsamuelsimon",
+    image: "/images/samuel.jpg",
+  },
+  {
+    name: "Thiago Sofka",
+    role: "Vice Presidente",
+    description: "Representação legal do clube, auxiliando na gestão, captação e suporte estratégico do projeto.",
+    phone: "[TELEFONE]",
+    instagram: "@tiagosofka",
+    image: "/images/thiago.jpg",
+  },
+  {
+    name: "Angelo R. Araujo Aristides",
+    role: "Secretário",
+    description: "Responsável pela organização administrativa e secretariado do projeto.",
+    phone: "[TELEFONE]",
+    instagram: "@angelo.r.araujo",
+    image: "/images/angelo.jpg",
   },
   {
     name: "Micael Albino",
     role: "Auxiliar Técnico",
     description: "Foco em preparação física e estratégias de jogo para competições. Estudante de Educação Física.",
-    phone: "(47) 90000-0000",
-    email: "micael@handebolriodosul.com",
+    phone: "(47) 9 8803-8754",
     instagram: "@albinomicael",
     image: "/images/micael.png",
   },
@@ -33,19 +55,25 @@ const coordinators = [
     name: "Igor Silva",
     role: "Auxiliar Técnico",
     description: "Responsável pelas categorias de base e formação de novos talentos, em especial, goleiros. Estudante de Educação Física.",
-    phone: "(47) 90000-0000",
-    email: "igor@handebolriodosul.com",
+    phone: "(47) 9 9949-3554",
     instagram: "@siilva.igord",
     image: "/images/igor.png",
   },
   {
-    name: "Samuel",
-    role: "Financeiro",
-    description: "Responsável pelas finanças do projeto.",
-    phone: "(47) 90000-0000",
-    email: "samuel@gmail.com",
-    instagram: "@samuel",
-    image: "/images/samuel.jpg",
+    name: "Bernhard Clauberg",
+    role: "Apoiador Externo",
+    description: "Apoiador e incentivador do clube. Viabiliza parcerias, materiais e contatos estratégicos.",
+    phone: "[TELEFONE]",
+    instagram: "@bernhardclauberg",
+    image: "/images/bernhard.jpg",
+  },
+  {
+    name: "Dione Debatin",
+    role: "Consultora Externa",
+    description: "Consultoria e suporte estratégico para o desenvolvimento institucional do projeto.",
+    phone: "(47) 9 8898-4300",
+    instagram: "@dione.debatin",
+    image: "/images/dione.jpg.jpg",
   },
 ]
 
@@ -56,7 +84,7 @@ export function TeamSection() {
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       loop: true, // Loop infinito — com 4 cards funciona perfeitamente sem bugs visuais
-      align: "center",
+      align: "start",
       skipSnaps: false,
       duration: 30, // Transição suave e rápida
     },
@@ -133,7 +161,7 @@ export function TeamSection() {
               {coordinators.map((coordinator) => (
                 <div
                   key={coordinator.name}
-                  className="flex-[0_0_85%] sm:flex-[0_0_50%] lg:flex-[0_0_25%] pl-4 min-w-0"
+                  className="flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_25%] pl-4 min-w-0"
                 >
                   <Card className="h-full overflow-hidden group hover:shadow-lg transition-all duration-300 border-border hover:border-amarelo/50">
                     <div className="aspect-[4/3] bg-gradient-to-br from-verde/20 to-azul/20 relative overflow-hidden">
@@ -166,31 +194,31 @@ export function TeamSection() {
                           {coordinator.description}
                         </p>
                         <div className="space-y-2">
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <Phone className="h-4 w-4" />
-                            <span>{coordinator.phone}</span>
-                          </div>
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <Mail className="h-4 w-4" />
-                            <span className="truncate">{coordinator.email}</span>
-                          </div>
+                          {coordinator.phone && (
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                              <Phone className="h-4 w-4" />
+                              <span>{coordinator.phone}</span>
+                            </div>
+                          )}
                         </div>
                       </div>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="w-full mt-4"
-                        asChild
-                      >
-                        <a
-                          href={`https://instagram.com/${coordinator.instagram.replace("@", "")}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                      {coordinator.instagram && (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="w-full mt-4"
+                          asChild
                         >
-                          <Instagram className="h-4 w-4 mr-2" />
-                          {coordinator.instagram}
-                        </a>
-                      </Button>
+                          <a
+                            href={`https://instagram.com/${coordinator.instagram.replace("@", "")}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <Instagram className="h-4 w-4 mr-2" />
+                            {coordinator.instagram}
+                          </a>
+                        </Button>
+                      )}
                     </CardContent>
                   </Card>
                 </div>
