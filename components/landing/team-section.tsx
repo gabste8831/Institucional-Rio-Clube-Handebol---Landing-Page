@@ -159,71 +159,71 @@ export function TeamSection() {
               ref={emblaRef}
             >
               <div className="flex -ml-4">
-              {coordinators.map((coordinator) => (
-                <div
-                  key={coordinator.name}
-                  className="flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_25%] pl-4 min-w-0"
-                >
-                  <Card className="h-full overflow-hidden group transition-all duration-300 border-border hover:border-amarelo/50">
-                    <div className="aspect-[4/3] bg-gradient-to-br from-verde/20 to-azul/20 relative overflow-hidden">
-                      <Image
-                        src={coordinator.image}
-                        alt={coordinator.name}
-                        fill
-                        className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <div className="absolute bottom-0 left-0 right-0 h-1 flex">
-                        <div className="flex-1 bg-verde" />
-                        <div className="flex-1 bg-amarelo" />
-                        <div className="flex-1 bg-azul" />
-                      </div>
-                    </div>
-                    <CardContent className="flex-1 flex flex-col">
-                      <div className="flex-1">
-                        <div className="mb-4">
-                          <h3 className="font-semibold text-lg">{coordinator.name}</h3>
-                          <p className="text-sm text-verde font-medium">{coordinator.role}</p>
+                {coordinators.map((coordinator) => (
+                  <div
+                    key={coordinator.name}
+                    className="flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_25%] pl-4 min-w-0"
+                  >
+                    <Card className="h-full overflow-hidden group transition-all duration-300 border-border hover:border-amarelo/50">
+                      <div className="aspect-[4/3] bg-gradient-to-br from-verde/20 to-azul/20 relative overflow-hidden">
+                        <Image
+                          src={coordinator.image}
+                          alt={coordinator.name}
+                          fill
+                          className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <div className="absolute bottom-0 left-0 right-0 h-1 flex">
+                          <div className="flex-1 bg-verde" />
+                          <div className="flex-1 bg-amarelo" />
+                          <div className="flex-1 bg-azul" />
                         </div>
+                      </div>
+                      <CardContent className="flex-1 flex flex-col">
+                        <div className="flex-1">
+                          <div className="mb-4">
+                            <h3 className="font-semibold text-lg">{coordinator.name}</h3>
+                            <p className="text-sm text-verde font-medium">{coordinator.role}</p>
+                          </div>
 
-                        {coordinator.cref && (
-                          <p className="text-foreground text-sm mb-2 leading-relaxed dark:text-white">
-                            {coordinator.cref}
-                          </p>
-                        )}
-
-                        <p className="text-muted-foreground text-xs mb-6 leading-relaxed">
-                          {coordinator.description}
-                        </p>
-                        <div className="space-y-2">
-                          {coordinator.phone && (
-                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                              <Phone className="h-4 w-4" />
-                              <span>{coordinator.phone}</span>
-                            </div>
+                          {coordinator.cref && (
+                            <p className="text-foreground text-sm mb-2 leading-relaxed dark:text-white">
+                              {coordinator.cref}
+                            </p>
                           )}
+
+                          <p className="text-muted-foreground text-xs mb-6 leading-relaxed">
+                            {coordinator.description}
+                          </p>
+                          <div className="space-y-2">
+                            {coordinator.phone && (
+                              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                <Phone className="h-4 w-4" />
+                                <span>{coordinator.phone}</span>
+                              </div>
+                            )}
+                          </div>
                         </div>
-                      </div>
-                      {coordinator.instagram && (
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="w-full mt-4 transition-colors duration-200 hover:bg-amarelo/10 hover:border-amarelo/50"
-                          asChild
-                        >
-                          <a
-                            href={`https://instagram.com/${coordinator.instagram.replace("@", "")}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        {coordinator.instagram && (
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="w-full mt-4 transition-colors duration-200 hover:bg-foreground/8 hover:text-foreground dark:hover:bg-foreground/15 dark:hover:text-foreground"
+                            asChild
                           >
-                            <Instagram className="h-4 w-4 mr-2" />
-                            {coordinator.instagram}
-                          </a>
-                        </Button>
-                      )}
-                    </CardContent>
-                  </Card>
-                </div>
-              ))}
+                            <a
+                              href={`https://instagram.com/${coordinator.instagram.replace("@", "")}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              <Instagram className="h-4 w-4 mr-2" />
+                              {coordinator.instagram}
+                            </a>
+                          </Button>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </div>
+                ))}
               </div>
             </div>
 
