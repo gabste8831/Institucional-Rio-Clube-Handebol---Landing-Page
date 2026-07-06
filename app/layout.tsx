@@ -15,25 +15,13 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: 'Handebol Rio do Sul | Projeto Esportivo Comunitário',
-  description: 'Projeto de handebol comunitário em Rio do Sul. Treinos gratuitos para crianças, jovens e adultos. Venha fazer parte do time!',
+  title: 'Rio Clube Handebol | Time Oficial de Handebol de Rio do Sul',
+  description: 'Projeto de handebol comunitário em Rio do Sul. Treinos gratuitos para crianças, jovens e adultos. Venha fazer parte da família Rio Clube!',
   keywords: ['handebol', 'rio do sul', 'esporte', 'treino', 'gratuito', 'comunidade'],
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: '/images/logo_rio_clube.png',
+    shortcut: '/images/logo_rio_clube.png',
+    apple: '/images/logo_rio_clube.png',
   },
 }
 
