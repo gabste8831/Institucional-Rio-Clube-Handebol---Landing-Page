@@ -19,8 +19,21 @@ const schedule = [
   {
     day: "Quarta-feira",
     classes: [
-      { name: "Infantil", time: "18:00 - 19:00" },
+      { name: "Infantil", time: "17:15 - 19:00" },
       { name: "Adulto", time: "19:00 - 21:00" }
+    ]
+  },
+  {
+    day: "Quinta-feira",
+    classes: [
+      { name: "Infantil", time: "15:00 - 16:30" }
+    ]
+  },
+  {
+    day: "Sexta-feira",
+    classes: [
+      { name: "Infantil", time: "13:30 - 15:00" },
+      { name: "Infantil", time: "16:00 - 18:00" }
     ]
   },
   {

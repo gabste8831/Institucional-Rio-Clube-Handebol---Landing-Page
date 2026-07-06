@@ -34,7 +34,7 @@ export function RealizationSection() {
             </h2>
             <p className="text-base text-muted-foreground leading-relaxed max-w-2xl mx-auto">
               O Rio Clube Handebol atua em parceria direta com a{" "}
-              <strong>Fundação Municipal de Esportes (FMD) de Rio do Sul</strong>,
+              <strong>Secretaria Municipal de Esporte e Lazer (SEMEL) de Rio do Sul</strong>,
               unindo o fomento institucional ao desenvolvimento desportivo e social de nossos jovens.
             </p>
           </motion.div>
@@ -106,11 +106,11 @@ export function RealizationSection() {
               }
             `}} />
 
-            <div 
+            <div
               className="w-full overflow-hidden relative py-4 select-none"
-              style={{ 
-                maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)', 
-                WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)' 
+              style={{
+                maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
+                WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)'
               }}
             >
 
@@ -124,11 +124,11 @@ export function RealizationSection() {
                   <div className="animate-marquee-realization flex gap-10 items-center">
                     {Array.from({ length: 3 }).flatMap((_, groupIndex) =>
                       mobileLogos.map((logo, logoIndex) => (
-                        <a 
-                          key={`${groupIndex}-${logoIndex}`} 
-                          href={logo.href} 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
+                        <a
+                          key={`${groupIndex}-${logoIndex}`}
+                          href={logo.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="flex flex-col items-center gap-2 px-4 shrink-0"
                         >
                           <div className={`relative ${logo.size}`}>

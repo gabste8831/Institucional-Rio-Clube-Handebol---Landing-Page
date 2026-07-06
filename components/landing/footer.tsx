@@ -46,7 +46,7 @@ export function Footer() {
                 <Instagram className="h-5 w-5" />
               </a>
               <a
-                href="https://wa.me/5547999990000"
+                href="https://wa.me/5547997409924?text=Olá! Gostaria de saber mais sobre o Handebol Rio do Sul."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-background/10 hover:bg-background/20 flex items-center justify-center transition-colors"
@@ -55,7 +55,7 @@ export function Footer() {
                 <Phone className="h-5 w-5" />
               </a>
               <a
-                href="mailto:contato@handebolriodosul.com"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=rioclubehandebol@gmail.com&su=Contato%20-%20Rioclube%20Handebol"
                 className="w-10 h-10 rounded-full bg-background/10 hover:bg-background/20 flex items-center justify-center transition-colors"
                 aria-label="E-mail"
               >
@@ -87,27 +87,33 @@ export function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 mt-0.5 shrink-0 text-background/50" />
-                <span className="text-background/70 text-sm">
-                  Ginásio Municipal de Esportes<br />
-                  Rio do Sul - SC
-                </span>
+                <a
+                  href="https://maps.app.goo.gl/2pVbGKXdX7uCGVjW6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-background/70 hover:text-background transition-colors text-sm"
+                >
+                  Colégio Municipal João Custódio da Luz - Rio do Sul - SC<br />
+                </a>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-5 w-5 shrink-0 text-background/50" />
                 <a
-                  href="tel:+5547999990000"
+                  href="https://wa.me/5547997409924?text=Olá! Gostaria de saber mais sobre o Handebol Rio do Sul."
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-background/70 hover:text-background transition-colors text-sm"
                 >
-                  (47) 99999-0000
+                  (47) 9 9740-9924
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 shrink-0 text-background/50" />
                 <a
-                  href="mailto:contato@handebolriodosul.com"
+                  href="mailto:rioclubehandebol@gmail.com"
                   className="text-background/70 hover:text-background break-all transition-colors text-sm"
                 >
-                  contato@handebolriodosul.com
+                  rioclubehandebol@gmail.com
                 </a>
               </li>
             </ul>
@@ -117,11 +123,11 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="py-6 border-t border-background/10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-background/50">
-            © {new Date().getFullYear()} Handebol Rio do Sul. Todos os direitos reservados.
+            © {new Date().getFullYear()} Rio Clube Handebol. Todos os direitos reservados.
           </p>
-          <p className="text-sm text-background/50 flex items-center gap-1">
+          <a className="text-sm text-background/50 flex items-center gap-1 hover:text-background transition-colors" href="https://www.instagram.com/gabr_ste/">
             Feito por Gabriel Steffens
-          </p>
+          </a>
         </div>
       </div>
 
