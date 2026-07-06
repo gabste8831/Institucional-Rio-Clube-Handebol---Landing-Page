@@ -18,6 +18,12 @@ export const metadata: Metadata = {
   title: 'Rio Clube Handebol | Time Oficial de Handebol de Rio do Sul',
   description: 'Projeto de handebol comunitário em Rio do Sul. Treinos gratuitos para crianças, jovens e adultos. Venha fazer parte da família Rio Clube!',
   keywords: ['handebol', 'rio do sul', 'esporte', 'treino', 'gratuito', 'comunidade'],
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    viewportFit: 'cover',
+  },
   icons: {
     icon: '/images/logo_rio_clube.png',
     shortcut: '/images/logo_rio_clube.png',
@@ -32,7 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" suppressHydrationWarning className="bg-background">
-      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased overflow-x-hidden`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
