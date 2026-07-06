@@ -165,7 +165,7 @@ export function TrainingSection() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start mb-16">
+        <div className="grid min-[1110px]:grid-cols-2 gap-12 items-start mb-16">
           {/* Schedule */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -193,8 +193,8 @@ export function TrainingSection() {
                       <p className="font-sans font-normal tracking-wide text-base">{item.day}</p>
                     </div>
                     <div className="flex flex-col gap-2 w-full sm:w-auto">
-                      {item.classes.map((c) => (
-                        <div key={c.name} className="flex items-center justify-between sm:justify-end gap-4 text-sm text-muted-foreground">
+                      {item.classes.map((c, idx) => (
+                        <div key={idx} className="flex items-center justify-between sm:justify-end gap-4 text-sm text-muted-foreground">
                           <span className="font-medium text-foreground/80">{c.name}</span>
                           <div className="flex items-center gap-2">
                             <Clock className="h-4 w-4 text-foreground dark:text-white" />
@@ -214,7 +214,7 @@ export function TrainingSection() {
             initial={{ opacity: 0, x: 20 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="grid sm:grid-cols-2 gap-4"
+            className="grid sm:grid-cols-2 gap-4 h-full"
           >
             {trainingTypes.map((type, index) => (
               <motion.div
@@ -222,7 +222,7 @@ export function TrainingSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-                className="group p-6 rounded-2xl bg-muted-foreground/6 border border-border/70 hover:border-verde/50 transition-all duration-300"
+                className="group p-6 rounded-2xl bg-muted-foreground/6 border border-border/70 hover:border-verde/50 transition-all duration-300 flex flex-col justify-center h-full"
               >
                 <div className="w-10 h-10 rounded-lg bg-muted-foreground/10 flex items-center justify-center mb-4 transition-colors duration-300 group-hover:bg-verde/10">
                   <type.icon className="h-6 w-6 text-foreground transition-colors duration-300 group-hover:text-verde" />

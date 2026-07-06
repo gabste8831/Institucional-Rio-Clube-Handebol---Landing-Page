@@ -160,7 +160,7 @@ export function GallerySection() {
               ))}
             </div>
           </div>
-          
+
           {/* Dots indicadores */}
           <div className="flex justify-center gap-2 mt-6">
             {images.map((_, index) => (
@@ -180,11 +180,10 @@ export function GallerySection() {
                   duration: 0.3,
                   ease: "easeInOut"
                 }}
-                className={`h-1 cursor-pointer rounded-full transition-all ${
-                  selectedIndex === index 
-                    ? 'bg-amarelo' 
+                className={`h-1 cursor-pointer rounded-full transition-all ${selectedIndex === index
+                    ? 'bg-amarelo'
                     : 'bg-muted-foreground/30'
-                }`}
+                  }`}
                 whileHover={{ scale: 1.1 }}
               />
             ))}
@@ -196,7 +195,7 @@ export function GallerySection() {
           {images.map((image, index) => {
             let colSpan = "col-span-1"
             let rowSpan = "row-span-1"
-            
+
             // Padrão compacto sem buracos - máximo 3 linhas
             if (index === 0) {
               colSpan = "col-span-2"
