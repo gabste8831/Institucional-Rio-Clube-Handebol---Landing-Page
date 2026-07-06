@@ -153,7 +153,7 @@ export function TeamSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <div className="relative hidden min-[1100px]:block">
+          <div className="relative">
             <div
               className="overflow-hidden rounded-xl"
               ref={emblaRef}
@@ -232,7 +232,7 @@ export function TeamSection() {
               onClick={() => {
                 emblaApi?.scrollPrev()
               }}
-              className="absolute -left-8 min-[1100px]:-left-12 top-1/2 -translate-y-1/2 z-0 flex h-10 w-10 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur-sm transition hover:bg-background/95 cursor-pointer"
+              className="absolute -left-8 min-[1100px]:-left-12 top-1/2 -translate-y-1/2 z-0 hidden min-[1100px]:flex h-10 w-10 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur-sm transition hover:bg-background/95 cursor-pointer"
               aria-label="Card anterior"
             >
               <ChevronLeft className="h-5 w-5" />
@@ -243,7 +243,7 @@ export function TeamSection() {
               onClick={() => {
                 emblaApi?.scrollNext()
               }}
-              className="absolute -right-8 min-[1100px]:-right-12 top-1/2 -translate-y-1/2 z-0 flex h-10 w-10 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur-sm transition hover:bg-background/95 cursor-pointer"
+              className="absolute -right-8 min-[1100px]:-right-12 top-1/2 -translate-y-1/2 z-0 hidden min-[1100px]:flex h-10 w-10 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur-sm transition hover:bg-background/95 cursor-pointer"
               aria-label="Próximo card"
             >
               <ChevronRight className="h-5 w-5" />
