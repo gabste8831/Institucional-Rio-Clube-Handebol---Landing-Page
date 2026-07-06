@@ -28,7 +28,7 @@ const coordinators = [
     image: "/images/samuel.jpg",
   },
   {
-    name: "Thiago Sofka",
+    name: "Tiago Sofka",
     role: "Vice Presidente",
     description: "Representação legal do clube, auxiliando na gestão, captação e suporte estratégico do projeto.",
     phone: "(47) 9 8830-8594",
