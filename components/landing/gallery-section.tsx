@@ -1,8 +1,8 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { useRef, useState, useEffect } from "react"
-import { X } from "lucide-react"
+import { useRef, useState, useEffect, type TouchEvent } from "react"
+import { X, ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import useEmblaCarousel from "embla-carousel-react"
@@ -70,7 +70,10 @@ const images = [
 export function GallerySection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
-  const [selectedImage, setSelectedImage] = useState<typeof images[0] | null>(null)
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null)
+  const touchStartX = useRef<number | null>(null)
+
+  const selectedImage = selectedImageIndex === null ? null : images[selectedImageIndex]
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
@@ -109,6 +112,61 @@ export function GallerySection() {
     }
   }, [emblaApi])
 
+  useEffect(() => {
+    if (selectedImageIndex === null) return
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "ArrowRight") {
+        event.preventDefault()
+        setSelectedImageIndex((prev) => (prev === null ? 0 : (prev + 1) % images.length))
+      }
+
+      if (event.key === "ArrowLeft") {
+        event.preventDefault()
+        setSelectedImageIndex((prev) => (prev === null ? images.length - 1 : (prev - 1 + images.length) % images.length))
+      }
+
+      if (event.key === "Escape") {
+        setSelectedImageIndex(null)
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+    document.body.style.overflow = "hidden"
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown)
+      document.body.style.overflow = ""
+    }
+  }, [selectedImageIndex])
+
+  const openImage = (index: number) => setSelectedImageIndex(index)
+  const closeLightbox = () => setSelectedImageIndex(null)
+
+  const navigateLightbox = (direction: 1 | -1) => {
+    setSelectedImageIndex((prev) => {
+      if (prev === null) return direction === 1 ? 0 : images.length - 1
+      return (prev + direction + images.length) % images.length
+    })
+  }
+
+  const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    touchStartX.current = event.touches[0]?.clientX ?? null
+  }
+
+  const handleTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
+    if (touchStartX.current === null) return
+
+    const deltaX = (event.changedTouches[0]?.clientX ?? 0) - touchStartX.current
+    if (deltaX > 50) {
+      navigateLightbox(-1)
+    } else if (deltaX < -50) {
+      navigateLightbox(1)
+    }
+
+    touchStartX.current = null
+  }
+
   return (
     <section id="galeria" className="py-20 bg-secondary/50" ref={ref}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -141,7 +199,7 @@ export function GallerySection() {
                 >
                   <div
                     className="relative h-64 rounded-2xl overflow-hidden cursor-pointer group m-2 ml-0"
-                    onClick={() => setSelectedImage(image)}
+                    onClick={() => openImage(images.findIndex((item) => item.id === image.id))}
                   >
                     <Image
                       src={image.src}
@@ -212,7 +270,7 @@ export function GallerySection() {
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.4, delay: index * 0.08 }}
                 className={`relative overflow-hidden rounded-2xl cursor-pointer group h-full ${colSpan} ${rowSpan}`}
-                onClick={() => setSelectedImage(image)}
+                onClick={() => openImage(index)}
               >
                 <div className="relative h-full w-full">
                   <Image
@@ -236,29 +294,62 @@ export function GallerySection() {
         {/* Lightbox */}
         {selectedImage && (
           <div
-            className="fixed inset-0 z-50 bg-background/95 flex items-center justify-center p-4"
-            onClick={() => setSelectedImage(null)}
+            className="fixed inset-0 z-50 bg-background/95 flex items-center justify-center p-3 sm:p-4"
+            onClick={closeLightbox}
           >
             <Button
               variant="ghost"
               size="icon"
               className="absolute top-4 right-4 z-10"
-              onClick={() => setSelectedImage(null)}
+              onClick={(event) => {
+                event.stopPropagation()
+                closeLightbox()
+              }}
             >
               <X className="h-6 w-6" />
             </Button>
-            <div className="relative max-w-4xl w-full aspect-video rounded-2xl overflow-hidden">
+
+            {images.length > 1 && (
+              <>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 h-11 w-11 rounded-full bg-background/70 backdrop-blur-sm"
+                  onClick={(event) => {
+                    event.stopPropagation()
+                    navigateLightbox(-1)
+                  }}
+                  aria-label="Foto anterior"
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 h-11 w-11 rounded-full bg-background/70 backdrop-blur-sm"
+                  onClick={(event) => {
+                    event.stopPropagation()
+                    navigateLightbox(1)
+                  }}
+                  aria-label="Próxima foto"
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </Button>
+              </>
+            )}
+
+            <div
+              className="relative max-w-4xl w-full aspect-[4/3] sm:aspect-video rounded-[6px] overflow-hidden"
+              onClick={(event) => event.stopPropagation()}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+            >
               <Image
                 src={selectedImage.src}
                 alt={selectedImage.alt}
                 fill
-                className="object-cover"
+                className="object-contain bg-background/10"
               />
-              <div className="absolute bottom-4 left-4">
-                <span className="px-4 py-2 rounded-full bg-background/90 text-foreground text-xs font-medium">
-                  {selectedImage.category}
-                </span>
-              </div>
             </div>
           </div>
         )}

@@ -3,7 +3,7 @@
 import { motion, useInView } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
 import Image from "next/image"
-import { Calendar, Clock, MapPin, Shield, Target, Dumbbell, Hand, ExternalLink } from "lucide-react"
+import { Calendar, Clock, MapPin, Shield, Target, Dumbbell, Hand, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
@@ -12,8 +12,13 @@ const schedule = [
   {
     day: "Segunda-feira",
     classes: [
-      { name: "Infantil", time: "18:00 - 19:00" },
       { name: "Adulto", time: "19:00 - 21:00" }
+    ]
+  },
+    {
+    day: "Terça-feira",
+    classes: [
+      { name: "Infantil", time: "18:00 - 19:30" }
     ]
   },
   {
@@ -94,11 +99,11 @@ const venues = [
   },
   {
     id: 4,
-    name: "Escola de Ensino Básico Paulo Zimmermann",
-    address: "R. São João, 115 - Centro, Rio do Sul - SC, 89160-147",
+    name: "EEB Paulo Cordeiro",
+    address: "R. XV de Novembro, 1441 - Laranjeiras, Rio do Sul - SC, 89167-328",
     description: "Quadra auxiliar para treinos adicionais e competições locais.",
-    image: "/images/ginasiopz.png",
-    mapsUrl: "https://maps.app.goo.gl/3oVTy5HrjDmKUAJe8",
+    image: "/images/paulo%20cordeiro.png",
+    mapsUrl: "https://maps.app.goo.gl/EN4caPqZf8XXyD4v5",
   },
 ]
 
@@ -195,10 +200,10 @@ export function TrainingSection() {
                     <div className="flex flex-col gap-2 w-full sm:w-auto">
                       {item.classes.map((c, idx) => (
                         <div key={idx} className="flex items-center justify-between sm:justify-end gap-4 text-sm text-muted-foreground">
-                          <span className="font-medium text-foreground/80">{c.name}</span>
-                          <div className="flex items-center gap-2">
-                            <Clock className="h-4 w-4 text-foreground dark:text-white" />
-                            <span className="text-base text-muted-foreground/70">{c.time}</span>
+                          <span className="font-medium text-foreground/80 min-w-[70px] text-left sm:text-right">{c.name}</span>
+                          <div className="flex items-center gap-2 min-w-[140px] justify-end">
+                            <Clock className="h-4 w-4 text-foreground dark:text-white shrink-0" />
+                            <span className="text-base text-end text-muted-foreground/70 whitespace-nowrap min-w-[100px]">{c.time}</span>
                           </div>
                         </div>
                       ))}
@@ -249,8 +254,9 @@ export function TrainingSection() {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="space-y-6"
         >
-          <div className="overflow-hidden rounded-2xl" ref={emblaRef}>
-            <div className="flex">
+          <div className="relative">
+            <div className="overflow-hidden rounded-2xl" ref={emblaRef}>
+              <div className="flex">
               {venues.map((venue) => (
                 <div
                   key={venue.id}
@@ -298,7 +304,38 @@ export function TrainingSection() {
                   </div>
                 </div>
               ))}
+              </div>
             </div>
+
+            <button
+              type="button"
+              onClick={() => {
+                emblaApi?.scrollPrev()
+                const autoplayPlugin = emblaApi?.plugins()?.autoplay as any
+                if (autoplayPlugin && typeof autoplayPlugin.play === 'function') {
+                  autoplayPlugin.play()
+                }
+              }}
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur-sm transition hover:bg-background/95 cursor-pointer"
+              aria-label="Local anterior"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                emblaApi?.scrollNext()
+                const autoplayPlugin = emblaApi?.plugins()?.autoplay as any
+                if (autoplayPlugin && typeof autoplayPlugin.play === 'function') {
+                  autoplayPlugin.play()
+                }
+              }}
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur-sm transition hover:bg-background/95 cursor-pointer"
+              aria-label="Próximo local"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
           </div>
 
           <div className="flex justify-center gap-2 mt-8">

@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, AnimatePresence, useInView } from "framer-motion"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { X, ChevronLeft, ChevronRight } from "lucide-react"
 
@@ -137,14 +137,14 @@ function MediaIndicator({
         {photos.slice(0, 3).map((photo, i) => (
           <div
             key={photo.src}
-            className="relative w-9 h-9 rounded-lg overflow-hidden border-2 border-background shadow-sm transition-transform"
+            className="relative w-9 h-9 rounded-lg overflow-hidden border-2 border-background transition-transform"
             style={{ zIndex: 3 - i }}
           >
             <Image src={photo.src} alt={photo.alt} fill className="object-cover" />
           </div>
         ))}
       </div>
-      <span className="text-xs text-muted-foreground/70 group-hover/media:text-foreground transition-colors">
+      <span className="text-xs text-muted-foreground/70 group-hover/media:text-foreground transition-colors hover:cursor-pointer">
         {photos.length} {photos.length === 1 ? "foto" : "fotos"} · ver galeria
       </span>
     </button>
@@ -184,7 +184,7 @@ function GalleryModal({
                 e.stopPropagation()
                 onNavigate(-1)
               }}
-              className="absolute left-3 md:left-6 text-white/70 hover:text-white transition-colors"
+              className="absolute left-3 md:left-6 text-white/70 hover:text-white transition-colors cursor-pointer"
               aria-label="Foto anterior"
             >
               <ChevronLeft className="w-9 h-9" />
@@ -223,7 +223,7 @@ function GalleryModal({
                 e.stopPropagation()
                 onNavigate(1)
               }}
-              className="absolute right-3 md:right-6 text-white/70 hover:text-white transition-colors"
+              className="absolute right-3 md:right-6 text-white/70 hover:text-white transition-colors cursor-pointer"
               aria-label="Próxima foto"
             >
               <ChevronRight className="w-9 h-9" />
@@ -240,6 +240,35 @@ export function HistorySection() {
   const timelineRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [gallery, setGallery] = useState<GalleryState | null>(null)
+
+  useEffect(() => {
+    if (!gallery) return
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "ArrowRight") {
+        event.preventDefault()
+        navigateGallery(1)
+      }
+
+      if (event.key === "ArrowLeft") {
+        event.preventDefault()
+        navigateGallery(-1)
+      }
+
+      if (event.key === "Escape") {
+        event.preventDefault()
+        setGallery(null)
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+    document.body.style.overflow = "hidden"
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown)
+      document.body.style.overflow = ""
+    }
+  }, [gallery])
 
   const openGallery = (photos: TimelinePhoto[]) => setGallery({ photos, index: 0 })
   const navigateGallery = (direction: 1 | -1) => {

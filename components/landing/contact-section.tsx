@@ -76,11 +76,11 @@ export function ContactSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
-              className={`group relative pt-16 pb-10 px-6 rounded-t-2xl rounded-b-none bg-card hover:bg-card/90 border border-border/80 ${item.hoverBorder} shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500 ease-out flex flex-col items-center text-center`}
+              className={`group relative pt-16 pb-10 px-6 rounded-t-2xl rounded-b-none bg-card hover:bg-card/90 border border-border/80 ${item.hoverBorder} hover:-translate-y-2 transition-all duration-500 ease-out flex flex-col items-center text-center`}
             >
               {/* Círculo com Ícone Sobreposto */}
               <div
-                className={`absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full flex items-center justify-center border-4 border-card shadow-md transition-all duration-500 ease-out ${item.bgClass}`}
+                className={`absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full flex items-center justify-center border-4 border-card transition-all duration-500 ease-out ${item.bgClass}`}
               >
                 <item.icon className="h-6 w-6" />
               </div>

@@ -165,7 +165,7 @@ export function PartnersSection() {
             <div className="shrink-0 relative z-10">
               <Button
                 asChild
-                className="inline-flex h-11 px-6 rounded-xl bg-foreground text-background hover:bg-foreground/90 font-medium transition-all duration-300 hover:shadow-lg shadow-sm"
+                className="inline-flex h-11 px-6 rounded-xl bg-foreground text-background hover:bg-foreground/90 font-medium transition-all duration-300"
               >
                 <a href="#contato">
                   Fale Conosco

@@ -51,7 +51,7 @@ export function RealizationSection() {
               href="https://www.instagram.com/rioclube_handebol/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-48 h-48 sm:w-56 sm:h-56 rounded-2xl bg-white hover:bg-secondary/50 dark:bg-zinc-950 hover:dark:bg-secondary/50 border border-border/80 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center p-4 sm:p-6 text-center group shrink-0"
+              className="w-48 h-48 sm:w-56 sm:h-56 rounded-2xl bg-white hover:bg-secondary/50 dark:bg-zinc-950 hover:dark:bg-secondary/50 border border-border/80 transition-all duration-300 flex flex-col items-center justify-center p-4 sm:p-6 text-center group shrink-0"
             >
               <div className="relative w-34 h-34 sm:w-35 sm:h-35 mb-1 sm:mb-2 flex items-center justify-center">
                 <Image
@@ -73,7 +73,7 @@ export function RealizationSection() {
               href="https://www.instagram.com/semelriodosul/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-48 h-48 sm:w-56 sm:h-56 rounded-2xl bg-white hover:bg-secondary/50 dark:bg-zinc-950 hover:dark:bg-secondary/50 border border-border/80 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center p-4 sm:p-6 text-center group shrink-0"
+              className="w-48 h-48 sm:w-56 sm:h-56 rounded-2xl bg-white hover:bg-secondary/50 dark:bg-zinc-950 hover:dark:bg-secondary/50 border border-border/80 transition-all duration-300 flex flex-col items-center justify-center p-4 sm:p-6 text-center group shrink-0"
             >
               <div className="relative w-45 h-45 sm:w-55 sm:h-55 mb-1 flex items-center justify-center">
                 <Image

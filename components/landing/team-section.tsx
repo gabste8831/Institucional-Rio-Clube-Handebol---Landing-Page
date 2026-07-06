@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
-import { Mail, Phone, Instagram } from "lucide-react"
+import { Mail, Phone, Instagram, ChevronLeft, ChevronRight } from "lucide-react"
 import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -31,7 +31,7 @@ const coordinators = [
     name: "Thiago Sofka",
     role: "Vice Presidente",
     description: "Representação legal do clube, auxiliando na gestão, captação e suporte estratégico do projeto.",
-    phone: "[TELEFONE]",
+    phone: "(47) 9 8830-8594",
     instagram: "@tiagosofka",
     image: "/images/thiago.jpg",
   },
@@ -39,7 +39,7 @@ const coordinators = [
     name: "Angelo R. Araujo Aristides",
     role: "Secretário",
     description: "Responsável pela organização administrativa e secretariado do projeto.",
-    phone: "[TELEFONE]",
+    phone: "(47) 9 9659-6419",
     instagram: "@angelo.r.araujo",
     image: "/images/angelo.jpg",
   },
@@ -63,7 +63,7 @@ const coordinators = [
     name: "Bernhard Clauberg",
     role: "Apoiador Externo",
     description: "Apoiador e incentivador do clube. Viabiliza parcerias, materiais e contatos estratégicos.",
-    phone: "[TELEFONE]",
+    phone: "(47) 9 8835-4649",
     instagram: "@bernhardclauberg",
     image: "/images/bernhard.jpg",
   },
@@ -153,17 +153,18 @@ export function TeamSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <div
-            className="overflow-hidden rounded-xl"
-            ref={emblaRef}
-          >
-            <div className="flex -ml-4">
+          <div className="relative hidden min-[1100px]:block">
+            <div
+              className="overflow-hidden rounded-xl"
+              ref={emblaRef}
+            >
+              <div className="flex -ml-4">
               {coordinators.map((coordinator) => (
                 <div
                   key={coordinator.name}
                   className="flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_25%] pl-4 min-w-0"
                 >
-                  <Card className="h-full overflow-hidden group hover:shadow-lg transition-all duration-300 border-border hover:border-amarelo/50">
+                  <Card className="h-full overflow-hidden group transition-all duration-300 border-border hover:border-amarelo/50">
                     <div className="aspect-[4/3] bg-gradient-to-br from-verde/20 to-azul/20 relative overflow-hidden">
                       <Image
                         src={coordinator.image}
@@ -206,7 +207,7 @@ export function TeamSection() {
                         <Button
                           variant="outline"
                           size="sm"
-                          className="w-full mt-4"
+                          className="w-full mt-4 transition-colors duration-200 hover:bg-amarelo/10 hover:border-amarelo/50"
                           asChild
                         >
                           <a
@@ -223,7 +224,30 @@ export function TeamSection() {
                   </Card>
                 </div>
               ))}
+              </div>
             </div>
+
+            <button
+              type="button"
+              onClick={() => {
+                emblaApi?.scrollPrev()
+              }}
+              className="absolute -left-8 min-[1100px]:-left-12 top-1/2 -translate-y-1/2 z-0 flex h-10 w-10 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur-sm transition hover:bg-background/95 cursor-pointer"
+              aria-label="Card anterior"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                emblaApi?.scrollNext()
+              }}
+              className="absolute -right-8 min-[1100px]:-right-12 top-1/2 -translate-y-1/2 z-0 flex h-10 w-10 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur-sm transition hover:bg-background/95 cursor-pointer"
+              aria-label="Próximo card"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
           </div>
 
           {/* Navegação */}
