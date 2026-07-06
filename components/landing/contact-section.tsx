@@ -66,7 +66,7 @@ export function ContactSection() {
         </motion.div>
 
         {/* Grid de Contatos com layout centralizado */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto pt-8">
+        <div className="grid grid-cols-1 min-[970px]:grid-cols-3 gap-12 max-w-5xl mx-auto pt-8">
           {contactInfo.map((item, index) => (
             <motion.a
               key={item.label}
@@ -91,7 +91,7 @@ export function ContactSection() {
               </span>
 
               {/* Valor Principal (Linkado visualmente) */}
-              <span className="font-sans font-semibold tracking-tight text-xs sm:text-sm xl:text-base text-foreground mb-3 break-all px-2 transition-colors duration-300">
+              <span className="font-sans font-semibold tracking-tight text-base sm:text-lg xl:text-xl text-foreground mb-3 break-words max-[970px]:break-all px-2 transition-colors duration-300">
                 {item.value}
               </span>
 
