@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
-import { Mail, Phone, Instagram, ChevronLeft, ChevronRight } from "lucide-react"
+import { Phone, Instagram, ChevronLeft, ChevronRight } from "lucide-react"
 import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"

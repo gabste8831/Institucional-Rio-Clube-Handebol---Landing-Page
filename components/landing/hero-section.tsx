@@ -58,7 +58,7 @@ export function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="max-w-2xl mx-auto text-base sm:text-xl text-muted-foreground text-pretty mb-10"
+            className="max-w-2xl mx-auto text-base sm:text-lg text-muted-foreground text-pretty mb-10"
           >
             Projeto esportivo pela Secretaria Municipal de Esporte e Lazer de Rio do Sul,
             que oferece treinos gratuitos para crianças, jovens e adultos.

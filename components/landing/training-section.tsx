@@ -3,7 +3,7 @@
 import { motion, useInView } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
 import Image from "next/image"
-import { Calendar, Clock, MapPin, Shield, Target, Dumbbell, Hand, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react"
+import { Calendar, Clock, MapPin, Shield, Target, Dumbbell, Hand, ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
@@ -86,7 +86,7 @@ const venues = [
     name: "Centro Universitário de Rio do Sul - UNIDAVI",
     address: "R. Júlio Roussenq Filho, 87-253 - Jardim América, Rio do Sul - SC, 89160-000",
     description: "Espaço dedicado ao treinamento técnico e desenvolvimento dos atletas.",
-    image: "/images/unidavi.jpg ",
+    image: "/images/unidavi.jpg",
     mapsUrl: "https://maps.app.goo.gl/z2DWVCKeCeGzW8oc8",
   },
   {
@@ -278,7 +278,7 @@ export function TrainingSection() {
                             {venue.name}
                           </h3>
                           <div className="flex items-start gap-2 mb-1">
-                            <MapPin className="h-3.5 w-3.5 text-red shrink-0 mt-0.5" />
+                            <MapPin className="h-3.5 w-3.5  shrink-0 mt-0.5" />
                             <p className="text-xs text-foreground/90 truncate">{venue.address}.</p>
                           </div>
                         </div>

@@ -91,7 +91,7 @@ export function ContactSection() {
               </span>
 
               {/* Valor Principal (Linkado visualmente) */}
-              <span className="font-sans font-semibold tracking-tight text-base sm:text-lg xl:text-xl text-foreground mb-3 break-all px-2 transition-colors duration-300">
+              <span className="font-sans font-semibold tracking-tight text-xs sm:text-sm xl:text-base text-foreground mb-3 break-all px-2 transition-colors duration-300">
                 {item.value}
               </span>
 
