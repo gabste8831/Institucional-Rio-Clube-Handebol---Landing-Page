@@ -316,7 +316,7 @@ export function TrainingSection() {
                   autoplayPlugin.play()
                 }
               }}
-              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur-sm transition hover:bg-background/95 cursor-pointer"
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 hidden md:flex h-10 w-10 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur-sm transition hover:bg-background/95 cursor-pointer"
               aria-label="Local anterior"
             >
               <ChevronLeft className="h-5 w-5" />
@@ -331,7 +331,7 @@ export function TrainingSection() {
                   autoplayPlugin.play()
                 }
               }}
-              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur-sm transition hover:bg-background/95 cursor-pointer"
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 hidden md:flex h-10 w-10 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur-sm transition hover:bg-background/95 cursor-pointer"
               aria-label="Próximo local"
             >
               <ChevronRight className="h-5 w-5" />
